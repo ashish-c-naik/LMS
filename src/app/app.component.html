@@ -1,22 +1,37 @@
-<div class="example-container">
-    <mat-toolbar color="primary" class="example-toolbar">
-      <button mat-icon-button (click)="snav.toggle()"><mat-icon>></mat-icon></button>
-      <h1 class="example-app-name">Responsive App</h1>
-    </mat-toolbar>
-  
-    <mat-sidenav-container class="example-sidenav-container">
-      <mat-sidenav #snav [mode]="over" fixedTopGap="56">
-        <mat-nav-list>
-          Ashish
-        </mat-nav-list>
-        <mat-nav-list>
-            Rashika
-          </mat-nav-list>
-      </mat-sidenav>
-  
-      <mat-sidenav-content>
-        Rashika
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(media === 'xs' || media === 'sm') ? 'dialog' : 'navigation'"
+  mode = "side" [opened]="true" >
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a href="#">Ashish</a>
+    </mat-nav-list>
+  </mat-sidenav>
 
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+            <!-- *ngIf="(media === 'xs')" -->
+            <mat-icon *ngIf = "!sideNav.opened" aria-label="Side nav toggle icon">menu</mat-icon>
+            <mat-icon *ngIf = "sideNav.opened" aria-label="Side nav close icon">arrow_back_ios</mat-icon>
+        </button>
+        <button mat-button>
+          <div class="image-home"></div>
+        </button>
+        <span class="right-spacer"></span>        
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Search" list="books">
+              <datalist id="books">
+                <option value="Book1"></option>
+              </datalist>
+            </mat-form-field>
+        </form>
+        <button mat-button>
+            <mat-icon>search</mat-icon>
+          </button>
+          <button mat-stroked-button>
+            Logout
+          </button>
+      </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>

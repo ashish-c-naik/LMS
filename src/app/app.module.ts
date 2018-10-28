@@ -5,8 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Component1Component } from './component1/component1.component';
-import { MatMenuModule, MatButtonModule, MatIconModule, MatToolbarModule, MatListModule } from '@angular/material';
+import { MatMenuModule, MatButtonModule,
+   MatIconModule, MatToolbarModule, MatListModule,
+   MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,12 +22,16 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatCheckboxModule,
     MatMenuModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
