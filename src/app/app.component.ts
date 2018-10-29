@@ -8,6 +8,4 @@ import { MatSidenav } from '@angular/material';
 })
 export class AppComponent {
   title = 'KASND';
-  opened: boolean;
-  @ViewChild('drawer') sideNav: MatSidenav;
 }

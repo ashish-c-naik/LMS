@@ -1,0 +1,37 @@
+.sidenav-container {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .sidenav {
+    width: 200px;
+    margin-top:8px;
+    max-height: 400px;
+    border: 0px;
+    background: snow;
+  }
+  
+  .image-home{
+    background: url("../../../assets/icon.png");
+    background-size: 100%;
+    width: 45px;
+    height: 45px;
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+  }
+  .example-form {
+    min-width: 50px;
+    font-size: 0.7em;
+  }
+  .right-spacer {
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    position: relative;
+  }
+  .example-full-width {
+    width: 50%;
+  }
+  

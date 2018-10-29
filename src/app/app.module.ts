@@ -4,21 +4,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Component1Component } from './component1/component1.component';
 import { MatMenuModule, MatButtonModule,
    MatIconModule, MatToolbarModule, MatListModule,
-   MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+   MatCheckboxModule, MatFormFieldModule, MatInputModule,
+   MatCardModule } from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
+import { NavigationComponent } from './util/navigation/navigation.component';
+import { LoginComponent } from './login/login.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    Component1Component
+    NavigationComponent,
+    LoginComponent,
   ],
   imports: [
+    FlexLayoutModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -26,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     MatMenuModule,
     MatButtonModule,
     MatSidenavModule,
+    MatCardModule,
     MatIconModule,
     MatToolbarModule,
     MatListModule,
