@@ -6,6 +6,7 @@ var mongoose = require('mongoose')
 mongoose.Promise = Promise
 var User = require('./models/User.js')
 var Book = require('./models/Book.js')
+var Issue = require('./models/Issue.js')
 var bcrypt = require('bcrypt-nodejs')
 var auth = require('./auth')
 var jwt = require('jwt-simple')
@@ -21,7 +22,12 @@ app.get('/browse/:param', async (req,res) => {
     res.send(books)
 })
 
-
+app.get('/issue/:param',  async (req,res) => {
+    var email = req.params.param
+    var issues = await Issue.find({email}, '-__v -_id');
+    console.log(issues);
+    res.send(issues)
+})
 
 // app.post('/post', auth.checkAuthenticated, (req,res) => {
 //     var postData = req.body

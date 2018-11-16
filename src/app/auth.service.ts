@@ -4,7 +4,6 @@ import { environment } from '../environments/environment';
 import { StatusService } from './message/status.service';
 @Injectable()
 export class AuthService {
-    issues = [];
     messages = [];
     path = environment.path + '/auth';
     TOKEN_KEY = 'token';
@@ -62,6 +61,8 @@ export class AuthService {
             if (res === 'Error') {
                 this._statusService.displayStatus('Error uploading the book', 'danger');
             } else {
+                localStorage.setItem(this.EMAIL_KEY, registerData.email);
+                localStorage.setItem(this.PASSWORD_KEY, registerData.password);
                 this._statusService.displayStatus('Success uploading a book detail', 'success');
             }
         });
@@ -82,30 +83,19 @@ export class AuthService {
     removeBook (data) {
         this.http.post<any>(this.path + '/removeBook', data).subscribe(res => {
             if (res === 'Error') {
-                this._statusService.displayStatus('Error changing data', 'danger');
+                this._statusService.displayStatus('Unable to delete the book.', 'danger');
             } else {
-                this._statusService.displayStatus('Success changing data', 'success');
+                this._statusService.displayStatus('Book deleted.', 'success');
             }
         });
     }
 
-    getIssues(data) {
-        this.http.post<any>(this.path + '/issue', data).subscribe(res => {
-            if (res === 'Error') {
-                this._statusService.displayStatus('Error changing data', 'danger');
-            } else {
-                this.issues = res;
-                this._statusService.displayStatus('Success changing data', 'success');
-            }
-        });
-    }
     makeIssue( data ) {
         this.http.post<any>(this.path + '/makeIssue', data).subscribe(res => {
             if (res === 'Error') {
-                this._statusService.displayStatus('Error changing data', 'danger');
+                this._statusService.displayStatus('Unable to checkout', 'danger');
             } else {
-                this.issues = res;
-                this._statusService.displayStatus('Success changing data', 'success');
+                this._statusService.displayStatus('Checkout complete', 'success');
             }
         });
     }

@@ -7,6 +7,7 @@ export class BookService {
 
     path = environment.path;
     books = [];
+    issues = [];
 
     constructor (
         private http: HttpClient,
@@ -19,4 +20,5 @@ export class BookService {
             this.books = res;
         });
     }
+
 }

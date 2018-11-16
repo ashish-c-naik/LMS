@@ -10,36 +10,33 @@ var router = express.Router()
 router.post('/makeIssue', (req, res) => {
     var data = req.body
     var book;
+    console.log(data.isbn);
     Book.findOne({ isbn: data.isbn }, function (err, obj) {
         if (err)
             res.status(500).send({ message: "Error" })
-        book = obj
-        }
-    )
-    var issue = new Issue(
-        data.email,
-        data.isbn,
-        book.author,
-        Date(),
-        Date() + 7
-    );
+        
+        console.log(obj)
+    today = new Date();
+    due  = new Date();
+    due.setDate(due.getDate() + 7)
+    var issue = new Issue({
+        email : data.email,
+        isbn : data.isbn,
+        author: obj.author,
+        title: obj.title,
+        issue: today,
+        due: due
+    });
     issue.save((err, obj) => {
         if (err)
             res.status(500).send({ message: "Error" })
         res.status(200).send({ message: "Success" })
     })
+
+}
+)
 });
 
-
-router.post('/issue', (req, res) => {
-    var data = req.body
-    Issue.find({ email: data.email }, function (err, obj) {
-        if (err)
-            res.status(500).send({ message: "Error" })
-        res.send(obj)
-        }
-    )
-});
 
 router.post('/removeBook', (req, res) => {
     var data = req.body
@@ -47,7 +44,7 @@ router.post('/removeBook', (req, res) => {
         if (err)
             res.status(500).send({ message: "Error" })
         res.status(200).send()
-        }
+    }
     )
 });
 

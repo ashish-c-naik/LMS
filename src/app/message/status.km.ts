@@ -11,17 +11,17 @@ const StatusMessages = {
     },
     statusSuccess: {
         statusMessage: '',
-        statusTimer: 1000,
+        statusTimer: 5000,
         statusType: 'success-dark',
     },
     statusWarning: {
         statusMessage: '',
-        statusTimer: 3000,
+        statusTimer: 5000,
         statusType: 'warning-dark',
     },
     statusInfo: {
         statusMessage: '',
-        statusTimer: 2000,
+        statusTimer: 5000,
         statusType: 'info-dark',
     },
 };

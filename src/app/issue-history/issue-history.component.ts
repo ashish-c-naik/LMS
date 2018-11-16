@@ -1,12 +1,30 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { AuthService } from '../auth.service';
+import { BookService } from '../book.service';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+export interface TableElement {
+  position: number;
+  isbn: number;
+  author: string;
+  issue: string;
+  due: string;
+  fine: number;
+}
+export class ExampleHttpDao {
+  constructor(private http: HttpClient) { }
 
+  getIssues(param: string): Observable<any> {
+    const href = environment.path;
+    const requestUrl =
+      `${href}/issue/${param}`;
+    return this.http.get<any>(requestUrl);
+  }
+}
 
-const ELEMENT_DATA: any[] = [
-  // {position: 1, BookId: 123, BookTitle: 'The way it is', Author: 'J.K. Rowling',
-  //  Issue: Date.now(), Due: Date.now(), Fine: 0, Return: 1}
-];
+const ELEMENT_DATA: TableElement[] = [];
 @Component({
   selector: 'app-issue-history',
   templateUrl: './issue-history.component.html',
@@ -15,29 +33,42 @@ const ELEMENT_DATA: any[] = [
 
 export class IssueHistoryComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  displayedColumns: string[] = ['position', 'BookId', 'BookTitle', 'Author', 'Issue', 'Due', 'Fine'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  data;
+  count = 1;
+  displayedColumns: string[] = ['serial', 'isbn', 'title', 'author', 'issue', 'due', 'fine'];
+  dataSource = null;
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   constructor(
-    private _authService: AuthService
-  ) { }
+    private _authService: AuthService,
+    private _bookService: BookService,
+    private http: HttpClient
+  ) {
+  }
 
   ngOnInit() {
-    this._authService.getIssues({email: localStorage.getItem('email')});
-    ELEMENT_DATA.push(this._authService.issues);
+    new ExampleHttpDao(this.http).getIssues(localStorage.getItem('email')).subscribe(res => {
+      this.data = res;
+      this.dataSource = new MatTableDataSource(this.data);
+    });
   }
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
     if (this._authService.Admin) {
       this.displayedColumns.push('Return');
     }
-    this.dataSource.paginator = this.paginator;
+    console.log(ELEMENT_DATA);
   }
-  return (id: number) {
-    console.log(id);
+  getFine(due: string) {
+    const todayDate = new Date();
+    const dueDate = new Date(due);
+    if (todayDate < dueDate ) {
+      return 0;
+    }
+    const timeDiff = Math.abs(todayDate.getTime() - dueDate.getTime());
+    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return diffDays;
   }
 }

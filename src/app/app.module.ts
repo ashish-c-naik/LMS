@@ -14,7 +14,7 @@ import { NavigationComponent } from './util/navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { BrowseComponent, DialogComponent, DialogUpdateComponent } from './browse/browse.component';
+import { BrowseComponent, DialogComponent } from './browse/browse.component';
 import { AuthService } from './auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './authInterceptor.service';
@@ -38,7 +38,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     BrowseComponent,
     IssueHistoryComponent,
     DialogComponent,
-    DialogUpdateComponent,
     AccountDetailsComponent,
     RegisterBookComponent,
     MessageComponent,
@@ -70,7 +69,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   ],
   entryComponents: [
     DialogComponent,
-    DialogUpdateComponent,
     SnackbarComponent
   ],
   providers: [AuthService, {

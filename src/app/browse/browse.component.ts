@@ -28,7 +28,7 @@ export interface DialogUpdateDate {
 export class BrowseComponent implements OnInit {
   pagetitle = 'Romance Novel';
   pageEvent: PageEvent;
-  checkout_email: string;
+  checkout_email = localStorage.getItem('email');
 
   title: string;
   author: string;
@@ -79,55 +79,53 @@ export class BrowseComponent implements OnInit {
   openDialog(isbn): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
-      data: { email: '' }
+      data: { email: this.checkout_email }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log(result);
-      this.checkout({isbn: isbn, email: result});
+      this.checkout_email = result;
+      this.checkout({isbn: isbn, email: this.checkout_email});
     });
   }
   checkout(data) {
     console.log('isbn', data.email);
     this._authService.makeIssue(data);
   }
-  openDialog1(): void {
-    const dialogRef1 = this.dialog.open(DialogUpdateComponent, {
-      width: '250px',
-      data: {
-        title: this.title,
-        author: this.author,
-        id: this.id,
-        category: this.category,
-        location: this.location,
-        availability: this.availability
-      }
-    });
 
-    dialogRef1.afterClosed().subscribe(result => {
-      console.log('The dialog 1 was closed');
-      this.title = result;
-    });
-  }
+  // openDialog1(): void {
+  //   const dialogRef1 = this.dialog.open(DialogUpdateComponent, {
+  //     width: '250px',
+  //     data: {
+  //       title: this.title,
+  //       author: this.author,
+  //       id: this.id,
+  //       category: this.category,
+  //       location: this.location,
+  //       availability: this.availability
+  //     }
+  //   });
+
+  //   dialogRef1.afterClosed().subscribe(result => {
+  //     console.log('The dialog 1 was closed');
+  //     this.title = result;
+  //   });
+  // }
 }
 @Component({
   selector: 'app-dialog',
   template: `
   <div >
     <h1 mat-dialog-title>Checkout</h1>
-      <div mat-dialog-content *ngIf="!_authService.isAuthenticated">
+      <div mat-dialog-content>
         <p>Enter your email id to checkout!</p>
         <mat-form-field>
           <input matInput [(ngModel)]="data.email">
         </mat-form-field>
       </div>
-      <div mat-dialog-content *ngIf="_authService.isAuthenticated">
-        <p>Checkout using <br> {{_authService.Email}} ?</p>
-      </div>
       <div mat-dialog-actions>
         <button mat-button (click)="onNoClick()">No Thanks</button>
-        <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+        <button mat-button [mat-dialog-close]="data.email" cdkFocusInitial>Ok</button>
       </div>
 </div>`,
 })
@@ -146,38 +144,38 @@ export class DialogComponent {
 
 }
 
-@Component({
-  selector: 'app-dialog',
-  template: `
-  <div >
-    <h1 mat-dialog-title>Checkout</h1>
-      <div mat-dialog-content>
-        <mat-form-field>
-        <input matInput [(ngModel)]="data.title" placeholder="book title"><br>
-        <input matInput [(ngModel)]="data.author" placeholder="Author"><br>
-        <input matInput [(ngModel)]="data.id" placeholder="Book Id"><br>
-        <input matInput [(ngModel)]="data.category" placeholder="Category"><br>
-        <input matInput [(ngModel)]="data.location" placeholder="Location"><br>
-        <input matInput [(ngModel)]="data.availability" placeholder="Avalability"><br>
-      </mat-form-field>
-      </div>
-      <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick()">No Thanks</button>
-        <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-      </div>
-</div>`,
-})
-export class DialogUpdateComponent {
+// @Component({
+//   selector: 'app-dialog',
+//   template: `
+//   <div >
+//     <h1 mat-dialog-title>Checkout</h1>
+//       <div mat-dialog-content>
+//         <mat-form-field>
+//         <input matInput [(ngModel)]="data.title" placeholder="book title"><br>
+//         <input matInput [(ngModel)]="data.author" placeholder="Author"><br>
+//         <input matInput [(ngModel)]="data.id" placeholder="Book Id"><br>
+//         <input matInput [(ngModel)]="data.category" placeholder="Category"><br>
+//         <input matInput [(ngModel)]="data.location" placeholder="Location"><br>
+//         <input matInput [(ngModel)]="data.availability" placeholder="Avalability"><br>
+//       </mat-form-field>
+//       </div>
+//       <div mat-dialog-actions>
+//         <button mat-button (click)="onNoClick()">No Thanks</button>
+//         <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+//       </div>
+// </div>`,
+// })
+// export class DialogUpdateComponent {
 
-  constructor(
-    private _authService: AuthService,
-    public dialogRef: MatDialogRef<DialogUpdateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogUpdateDate) {
+//   constructor(
+//     private _authService: AuthService,
+//     public dialogRef: MatDialogRef<DialogUpdateComponent>,
+//     @Inject(MAT_DIALOG_DATA) public data: DialogUpdateDate) {
 
-  }
+//   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
 
-}
+// }
