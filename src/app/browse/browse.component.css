@@ -1,0 +1,16 @@
+.example-card {
+    max-width: 300px; 
+  }
+  
+  .example-header-image {
+    background-image: url('../../assets/book.jpg');
+    background-size: cover;
+    width: 100px;
+    height: 150px;
+    float: left;
+    border-radius: 0px;
+  }
+.paginator > * {
+    position: relative;
+    z-index: 100;
+}

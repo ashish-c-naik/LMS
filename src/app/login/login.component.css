@@ -1,5 +1,12 @@
-mat-card{
-    position: fixed;
-    left: 50%;
-    top:25%;
+.same_height > mat-card{
+    height: 300px;
+}
+.draw_line {
+    margin-left:50px;
+    height: 400px;
+    border: 0.2px solid slategray;
+    width:0.5px;
+}
+.margin {
+    margin-left:50px;
 }

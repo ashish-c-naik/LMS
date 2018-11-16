@@ -1,18 +1,51 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>
-            <h4>Login</h4>
-        </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-    <form class="example-form">
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="loginData.email" name="email" matInput placeholder="Email" type="email">
-    </mat-form-field><br>
-    <mat-form-field class="example-full-width">
-        <input [(ngModel)]="loginData.password" name="password" matInput placeholder="Password" type="password">
-    </mat-form-field><br>
-    <button (click)="post()" mat-raised-button color="primary">Login</button>
-    </form>
-    </mat-card-content>
-</mat-card>
+<div style="display: block;height: 80vh;" fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="20px">
+    <div class="same_height">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <h4>Login</h4>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="loginData.email" name="email" matInput placeholder="Email" type="email">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="loginData.password" name="password" matInput placeholder="Password" type="password">
+                    </mat-form-field>
+                    <br>
+                    <button (click)="login_post()" mat-raised-button color="primary">Login</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="draw_line"></div>
+    <div class="same_height margin">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <h4>Register</h4>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="RegisterData.email" name="email" matInput placeholder="Email" type="email">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="RegisterData.password" name="password" matInput placeholder="Password" type="password">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="RegisterData.confirm_password" name="confirm_password" matInput placeholder="Confirm password" type="password">
+                    </mat-form-field>
+                    <br>
+                    <button (click)="register_post()" mat-raised-button color="primary">Register</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
+import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -8,10 +10,18 @@ import { MediaChange, ObservableMedia } from '@angular/flex-layout';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  type = 'type';
+  showTitle = true;
+  show = false;
+  islogged = this.authService.isAuthenticated;
   opened: boolean;
   private media: string;
-  @ViewChild('drawer') sideNav: MatSidenav;
-  constructor(private _media$: ObservableMedia) { }
+  @ViewChild('snav') sideNav: MatSidenav;
+  constructor(
+    private _media$: ObservableMedia,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.sideNav.close();
@@ -21,8 +31,8 @@ export class NavigationComponent implements OnInit {
   }
   onResize(event) {
     if (this.media === 'xs' || this.media === 'sm') {
+      this.showTitle = false;
       this.sideNav.close();
-    }
+    } else { this.showTitle = true; }
   }
-
 }

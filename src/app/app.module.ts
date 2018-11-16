@@ -7,12 +7,26 @@ import { AppComponent } from './app.component';
 import { MatMenuModule, MatButtonModule,
    MatIconModule, MatToolbarModule, MatListModule,
    MatCheckboxModule, MatFormFieldModule, MatInputModule,
-   MatCardModule } from '@angular/material';
+   MatCardModule, MatGridListModule, MatPaginatorModule, MatDialogModule, MatTableModule} from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
 import { NavigationComponent } from './util/navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { BrowseComponent, DialogComponent, DialogUpdateComponent } from './browse/browse.component';
+import { AuthService } from './auth.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './authInterceptor.service';
+import { IssueHistoryComponent } from './issue-history/issue-history.component';
+import { AccountDetailsComponent } from './account-details/account-details.component';
+import { RegisterBookComponent } from './register-book/register-book.component';
+import { AuthGuard } from './auth.guard';
+import { AuthGuardLogin } from './auth.guard.login';
+import { BookService } from './book.service';
+import { MessageComponent } from './message/message.component';
+import { SnackbarComponent } from './message/message-snackbar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -21,8 +35,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppComponent,
     NavigationComponent,
     LoginComponent,
+    BrowseComponent,
+    IssueHistoryComponent,
+    DialogComponent,
+    DialogUpdateComponent,
+    AccountDetailsComponent,
+    RegisterBookComponent,
+    MessageComponent,
+    SnackbarComponent
   ],
   imports: [
+    MatSnackBarModule,
+    MatTableModule,
+    MatDialogModule,
+    MatExpansionModule,
     FlexLayoutModule,
     BrowserModule,
     AppRoutingModule,
@@ -37,9 +63,23 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule,
+    MatGridListModule,
+    MatPaginatorModule
   ],
-  providers: [],
+  entryComponents: [
+    DialogComponent,
+    DialogUpdateComponent,
+    SnackbarComponent
+  ],
+  providers: [AuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }, AuthGuard, AuthGuardLogin,
+  BookService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

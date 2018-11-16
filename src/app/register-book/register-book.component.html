@@ -1,0 +1,38 @@
+<div style="display: block;height: 80vh;" fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="20px">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h4>Register a book</h4>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="RegisterBook.title" name="title" matInput placeholder="Title" type="name">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="RegisterBook.author" name="author" matInput placeholder="Author" type="name">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="RegisterBook.isbn" name="id" matInput placeholder="Book Id" type="name">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="RegisterBook.category" name="category" matInput placeholder="Category" type="name">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="RegisterBook.location" name="location" matInput placeholder="Location" type="name">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="RegisterBook.availability" name="availability" matInput placeholder="Availability" type="name">
+                </mat-form-field>
+                <br>
+                <button (click)="register_post()" mat-raised-button color="primary">Register</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

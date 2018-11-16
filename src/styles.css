@@ -1,3 +1,23 @@
-    /* You can add global styles to this file, and also import other style files */
-    @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
-    @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+body { 
+    font-family: 'Roboto', sans-serif;
+}
+
+.danger-dark{
+    background: #F44336;
+    color: white;
+}
+.success-dark{
+    background: green;
+    color: white;
+}
+.warning-dark{
+    background: orange;
+    color: white;
+}
+.info-dark{
+    background: rgb(96, 110, 124);
+    color: white;
+}
