@@ -1,13 +1,3 @@
-/* Copyright 2014-2018 by George Mason University, Laboratory for Collective Intelligence
-* All rights reserved.
-* Access and use allowed only based on a signed 'Argupedias Code License 2018'.
-*
-* Authors: Ashish
-* Comments: Ashish
-*/
-//
-// Imports
-//
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
