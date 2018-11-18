@@ -18,14 +18,18 @@ app.use(bodyParser.json())
 
 app.get('/browse/:param', async (req,res) => {
     var category = req.params.param
-    var books = await Book.find({category})
+    var books = await Book.find({category: category, availability: {$gt: 0}})
     res.send(books)
 })
 
 app.get('/issue/:param',  async (req,res) => {
     var email = req.params.param
     var issues = await Issue.find({email}, '-__v -_id');
-    console.log(issues);
+    res.send(issues)
+})
+
+app.get('/issues',  async (req,res) => {
+    var issues = await Issue.find({}, '-__v -_id');
     res.send(issues)
 })
 

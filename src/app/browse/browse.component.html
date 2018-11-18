@@ -1,8 +1,8 @@
 <div class="paginator" style="position: fixed;z-index: 99;right:0;width: 100vw;">
-  <div style="background: snow; height: 30px; text-align: center;padding: 5px;">
+  <div style="background:rgb(250, 250, 250); height: 30px; text-align: center;padding: 5px;">
   <span style="font-size: 25px;">{{pagetitle}}</span>    
   </div>
-    <mat-paginator style="background:rgb(238, 238, 238)"  [length]="5"
+    <mat-paginator style="background: rgb(250,250,250); border:none;"  [length]="5"
               [pageSize]="5"
               [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
@@ -10,12 +10,14 @@
 <mat-grid-list cols="5">
     <mat-grid-tile *ngFor='let book of _bookService.books' [colspan]="1" [rowspan]="1.5">
         <mat-card class="example-card">
-            <mat-card-header>
-              <div class="example-header-image"></div>
-            </mat-card-header>
+              <div style="width: 100%; text-align: center;">
+                <div class="example-header-image"> </div>
+              </div>
             <mat-card-content style="text-align: center;"> 
                 <mat-card-title>{{book.author}}</mat-card-title>
                 <mat-card-subtitle>{{book.title}}</mat-card-subtitle>
+                <mat-card-subtitle style="font-size:12px; color: grey; margin: 0px;"> Book Id: {{book.isbn}}</mat-card-subtitle>
+                <mat-card-subtitle style="font-size:12px; color: grey; margin: 0px;"> Location: {{book.location}}</mat-card-subtitle>
             </mat-card-content>
             <mat-card-actions>
               <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">

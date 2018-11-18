@@ -3,6 +3,7 @@ import { CategoryEnum } from '../category.enum';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { BookService } from '../book.service';
+import { NavigationService } from '../util/navigation/navigation.service';
 
 @Component({
   selector: 'app-register-book',
@@ -21,10 +22,14 @@ export class RegisterBookComponent implements OnInit {
   constructor(
     private _authService: AuthService,
     private _router: Router,
-    private _bookService: BookService
+    private _bookService: BookService,
+    private navigationService: NavigationService
   ) { }
 
   ngOnInit() {
+    this.navigationService.showLogin = false;
+    this.navigationService.showRegister = false;
+    this.navigationService.showSearch = false;
   }
   register_post() {
     this._authService.registerBook(this.RegisterBook);

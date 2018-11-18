@@ -1,7 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { StatusService } from './message/status.service';
+import { Route, Router } from '@angular/router';
+import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+
 @Injectable()
 export class AuthService {
     messages = [];
@@ -14,7 +18,11 @@ export class AuthService {
 
     // store the URL so we can redirect after logging in
     redirectUrl: string;
-    constructor( private http: HttpClient, private _statusService: StatusService) {}
+    constructor(
+        private http: HttpClient,
+        private _statusService: StatusService,
+        private router: Router
+    ) {}
     get Email() {
         return this.email;
     }
@@ -64,6 +72,7 @@ export class AuthService {
                 localStorage.setItem(this.EMAIL_KEY, registerData.email);
                 localStorage.setItem(this.PASSWORD_KEY, registerData.password);
                 this._statusService.displayStatus('Success uploading a book detail', 'success');
+                this.routeReload();
             }
         });
     }
@@ -77,6 +86,7 @@ export class AuthService {
                 localStorage.removeItem('email1');
                 localStorage.removeItem('password1');
                 this._statusService.displayStatus('Success changing data', 'success');
+                this.routeReload();
             }
         });
     }
@@ -86,17 +96,35 @@ export class AuthService {
                 this._statusService.displayStatus('Unable to delete the book.', 'danger');
             } else {
                 this._statusService.displayStatus('Book deleted.', 'success');
+                this.routeReload();
             }
         });
     }
 
     makeIssue( data ) {
-        this.http.post<any>(this.path + '/makeIssue', data).subscribe(res => {
-            if (res === 'Error') {
-                this._statusService.displayStatus('Unable to checkout', 'danger');
-            } else {
+        this.http.post<any>(this.path + '/makeIssue', data)
+        .subscribe(res => {
+                console.log(res);
                 this._statusService.displayStatus('Checkout complete', 'success');
-            }
+                this.routeReload();
         });
+    }
+    removeIssues(isbn) {
+        this.http.post<any>(this.path + '/removeIssue', isbn).subscribe(res => {
+            // if (res === 're') {
+            //     this._statusService.displayStatus('Unable to remove issue', 'danger');
+            // } else {
+                this._statusService.displayStatus('Success', 'success');
+                this.routeReload();
+            // }
+        });
+    }
+
+    routeReload() {
+        window.location.reload();
+    }
+
+    handleError(error: HttpErrorResponse) {
+    return throwError('sadf');
     }
 }

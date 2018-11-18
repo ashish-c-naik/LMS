@@ -5,9 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatMenuModule, MatButtonModule,
-   MatIconModule, MatToolbarModule, MatListModule,
-   MatCheckboxModule, MatFormFieldModule, MatInputModule,
-   MatCardModule, MatGridListModule, MatPaginatorModule, MatDialogModule, MatTableModule} from '@angular/material';
+  MatIconModule, MatToolbarModule, MatListModule,
+  MatCheckboxModule, MatFormFieldModule, MatInputModule,
+  MatCardModule, MatGridListModule, MatPaginatorModule, MatDialogModule,
+  MatTableModule, MatRadioModule, MatSelectModule} from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
 import { NavigationComponent } from './util/navigation/navigation.component';
@@ -27,6 +28,7 @@ import { BookService } from './book.service';
 import { MessageComponent } from './message/message.component';
 import { SnackbarComponent } from './message/message-snackbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { NavigationService } from './util/navigation/navigation.service';
 
 
 
@@ -65,7 +67,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatInputModule,
     HttpClientModule,
     MatGridListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatRadioModule,
+    MatSelectModule
   ],
   entryComponents: [
     DialogComponent,
@@ -76,7 +80,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     useClass: AuthInterceptorService,
     multi: true
   }, AuthGuard, AuthGuardLogin,
-  BookService
+  BookService,
+  NavigationService
 ],
   bootstrap: [AppComponent]
 })

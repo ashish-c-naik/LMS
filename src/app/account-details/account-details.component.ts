@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { StatusService } from '../message/status.service';
+import { NavigationService } from '../util/navigation/navigation.service';
 
 @Component({
   selector: 'app-account-details',
@@ -8,6 +9,7 @@ import { StatusService } from '../message/status.service';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit {
+  hidePassword = true;
   AccountDetails = {
     previous: '',
     email: '',
@@ -16,10 +18,14 @@ export class AccountDetailsComponent implements OnInit {
   };
   constructor(
     private _authService: AuthService,
-    private _statusService: StatusService
+    private _statusService: StatusService,
+    private navigationService: NavigationService
   ) { }
 
   ngOnInit() {
+    this.navigationService.showLogin = true;
+    this.navigationService.showRegister = true;
+    this.navigationService.showSearch = true;
   }
 
   change_details() {

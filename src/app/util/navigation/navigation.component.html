@@ -56,38 +56,40 @@
     <button mat-button [routerLink]="['/browse']">
       <div class="image-home"></div>
     </button>
-    <h1 class="example-app-name" *ngIf="showTitle" fxShow="false" fxShow.gt-sm>Library Management System</h1>
+    <h1 class="example-app-name" *ngIf="showTitle" fxShow="false" fxShow.gt-sm [routerLink]="['/browse']" style="cursor: pointer;font-size: 24px;">
+      Library Management System
+    </h1>
     <span class="right-spacer"></span>
-    <form class="example-form">
+    <form class="example-form" *ngIf="navigationService.showRegister">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Search" list="books">
         <datalist id="books">
           <option value="Out of box"></option>
         </datalist>
       </mat-form-field>
+      <button mat-button>
+        <mat-icon>search</mat-icon>
+      </button>
     </form>
-    <button mat-button>
-      <mat-icon>search</mat-icon>
-    </button>
     <button mat-stroked-button *ngIf="authService.isAuthenticated" (click)="this.authService.logout()">
       Logout
     </button>
-    <button mat-stroked-button *ngIf="!authService.isAuthenticated" [routerLink]="['/login']">
+    <a class="header_link" *ngIf="!authService.isAuthenticated&&navigationService.showLogin" [routerLink]="['/login']">
       Login
-    </button>
-    <button mat-stroked-button *ngIf="!authService.isAuthenticated" [routerLink]="['/login']">
+    </a>
+    <a class="header_link" *ngIf="!authService.isAuthenticated&&navigationService.showRegister" [routerLink]="['/login']">
       Register
-    </button>
+    </a>
   </mat-toolbar>
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav [mode]="side" fixedTopGap="62" fixedInViewport="true" [attr.role]="(media === 'xs' || media === 'sm') ? 'dialog' : 'navigation'"
       mode="side" [opened]="false" (window:resize)="onResize($event)">
       <mat-nav-list class="left_nav_list">
-          <div class="content" *ngIf="authService.Admin" [routerLink]="['/register_book']">
-            <mat-icon>book</mat-icon>
-            <span class="text_content"> Regsiter book </span>
-          </div>
-          <br *ngIf="authService.Admin">
+        <div class="content" *ngIf="authService.Admin" [routerLink]="['/register_book']">
+          <mat-icon>book</mat-icon>
+          <span class="text_content"> Regsiter book </span>
+        </div>
+        <br *ngIf="authService.Admin">
         <div class="content" *ngIf="authService.isAuthenticated" [routerLink]="['/account_details']">
           <mat-icon>account_circle</mat-icon>
           <span class="text_content"> Account details </span>
@@ -107,13 +109,23 @@
           </mat-icon>
         </div>
         <div *ngIf="show" class="">
-          <a class="content" [routerLink]="['/browse', 'r_n']">Romance novel</a>
+          <a class="content" [routerLink]="['/browse', 'mat']">Mathematics</a>
           <br>
-          <a class="content" [routerLink]="['/browse', 'h_f']">Horror fiction</a>
+          <a class="content" [routerLink]="['/browse', 'sci']">Science</a>
           <br>
-          <a class="content" [routerLink]="['/browse', 's_f']">Science fiction</a>
+          <a class="content" [routerLink]="['/browse', 'tec']">Technology</a>
           <br>
-          <a class="content" [routerLink]="['/browse', 'f']">Fantasy</a>
+          <a class="content" [routerLink]="['/browse', 'art']">Art</a>
+          <br>
+          <a class="content" [routerLink]="['/browse', 'his']">History</a>
+          <br>
+          <a class="content" [routerLink]="['/browse', 'hea']">Health</a>
+          <br>
+          <a class="content" [routerLink]="['/browse', 'ent']">Entertainment</a>
+          <br>
+          <a class="content" [routerLink]="['/browse',   'fic']">Fiction</a>
+          <br>
+          <a class="content" [routerLink]="['/browse', 'mis']">Miscellaneous</a>
           <br>
         </div>
         <br *ngIf="!authService.isAuthenticated">

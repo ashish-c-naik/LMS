@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NavigationService } from '../util/navigation/navigation.service';
 
 @Component({
   selector: 'app-login',
@@ -14,25 +15,34 @@ export class LoginComponent implements OnInit {
   };
   RegisterData = {
     email: '',
-    password: '',
-    confirm_password: ''
+    password: ''
   };
   return: string;
+  hidePasswordRegister = true;
+  hidePasswordLogin = true;
+
   constructor(private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private navigationService: NavigationService
   ) {
   }
 
   ngOnInit() {
+    this.navigationService.showLogin = false;
+    this.navigationService.showRegister = false;
+    this.navigationService.showSearch = false;
   }
   register_post() {
-    console.log(this.RegisterData);
     this.authService.registerUser(this.RegisterData);
     this.router.navigateByUrl(this.return);
   }
   login_post() {
     this.authService.loginUser(this.loginData);
     this.router.navigateByUrl(this.return);
+  }
+  onDestroy () {
+    this.navigationService.showLogin = true;
+    this.navigationService.showRegister = true;
   }
 }

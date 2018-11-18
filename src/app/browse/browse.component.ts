@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CategoryEnum } from '../category.enum';
 import { ActivatedRoute, Router, NavigationStart, Params, NavigationEnd } from '@angular/router';
 import { BookService } from '../book.service';
+import { NavigationService } from '../util/navigation/navigation.service';
 export interface DialogData {
   email: string;
 }
@@ -26,7 +27,7 @@ export interface DialogUpdateDate {
   styleUrls: ['./browse.component.css']
 })
 export class BrowseComponent implements OnInit {
-  pagetitle = 'Romance Novel';
+  pagetitle = 'Mathematics';
   pageEvent: PageEvent;
   checkout_email = localStorage.getItem('email');
 
@@ -43,7 +44,8 @@ export class BrowseComponent implements OnInit {
     private route: ActivatedRoute,
     private _bookService: BookService,
     private router: Router,
-    location: Location
+    location: Location,
+    private navigationService: NavigationService
   ) {
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
@@ -53,23 +55,37 @@ export class BrowseComponent implements OnInit {
   });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.navigationService.showLogin = true;
+    this.navigationService.showRegister = true;
+    this.navigationService.showSearch = true;
     this.selectParam();
   }
   selectParam() {
-    let param = this.route.snapshot.paramMap.get('id');
-    if (param === null || param === '') {
-      param = 'r_n';
-      this.pagetitle = 'Romance Novel';
-    }if (param === 'r_n') {
-      this.pagetitle = 'Romance novel';
-    } else if (param === 'h_f') {
-      this.pagetitle = 'Horror fiction';
-    } else if (param === 'f') {
-      this.pagetitle = 'Fantasy';
-    } else if (param === 's_f') {
-      this.pagetitle = 'Science fiction';
+    let param;
+    this.route.params.subscribe (params => {
+      param = params['id'] || 'mat';
+    });
+    if (param === 'mat') {
+      this.pagetitle = 'Mathematics';
+    } else if (param === 'sci') {
+      this.pagetitle = 'Science';
+    } else if (param === 'tec') {
+      this.pagetitle = 'Technology';
+    } else if (param === 'art') {
+      this.pagetitle = 'Art';
+    } else if (param === 'his') {
+      this.pagetitle = 'History';
+    } else if (param === 'hea') {
+      this.pagetitle = 'Health';
+    } else if (param === 'ent') {
+      this.pagetitle = 'Entertainment';
+    } else if (param === 'fic') {
+      this.pagetitle = 'Fiction';
+    } else if (param === 'mis') {
+      this.pagetitle = 'Miscellaneous';
     }
+    console.log(param);
     this._bookService.getBooks(param);
   }
   remove (data) {

@@ -123,3 +123,15 @@
   .icon_content{
     margin-left:70px;
   }
+  .header_link {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 0.7em;
+  }
+  .header_link:hover {
+    color: white;
+  }
+  .header_link:visited {
+    color: white;
+  }

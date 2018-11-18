@@ -6,35 +6,61 @@ var bcrypt = require('bcrypt-nodejs')
 var express = require('express')
 var router = express.Router()
 
+router.post('/removeIssue', (req, res) => {
+    var data = req.body
+    Issue.findOneAndRemove({ isbn: data.isbn }, function (err) {
+        if (err)
+            res.status(500).send({ message: "Error" })
+        Book.findOne({ isbn: data.isbn }, function (err, obj) {
+            obj.availability = obj.availability + 1;
+            obj.save(function (err, uo) {
+                if (err)
+                    res.status(500).send({ message: 'Error' });
+                res.status(200).send({ message: "Success" })
+            })
+        })
+    }
+    )
+});
 
 router.post('/makeIssue', (req, res) => {
     var data = req.body
     var book;
-    console.log(data.isbn);
-    Book.findOne({ isbn: data.isbn }, function (err, obj) {
-        if (err)
-            res.status(500).send({ message: "Error" })
-        
-        console.log(obj)
-    today = new Date();
-    due  = new Date();
-    due.setDate(due.getDate() + 7)
-    var issue = new Issue({
-        email : data.email,
-        isbn : data.isbn,
-        author: obj.author,
-        title: obj.title,
-        issue: today,
-        due: due
-    });
-    issue.save((err, obj) => {
-        if (err)
-            res.status(500).send({ message: "Error" })
-        res.status(200).send({ message: "Success" })
+    Issue.findOne({ email: data.email, isbn: data.isbn }, function (err, obj) {
+        if (err) {}
+        if (!obj) {
+            Book.findOne({ isbn: data.isbn }, function (err, obj) {
+                if (err)
+                    res.status(500).send({ message: "Error" })
+                if (obj == null) {
+                    res.status(500).send({ message: "Error" })
+                } else {
+                    obj.availability = obj.availability - 1;
+                    obj.save(function (err, uo) {
+                        if (err)
+                            res.status(500).send({ message: 'Error' });
+                    })
+                    today = new Date();
+                    due = new Date();
+                    due.setDate(due.getDate() + 7)
+                    var issue = new Issue({
+                        email: data.email,
+                        isbn: data.isbn,
+                        author: obj.author,
+                        title: obj.title,
+                        issue: today,
+                        due: due
+                    });
+                    issue.save((err, obj) => {
+                        if (err)
+                            res.status(500).send({ message: "Error" })
+                        res.status(200).send({ message: "Success" })
+                    })
+                }
+            }
+            )
+        }
     })
-
-}
-)
 });
 
 
@@ -43,7 +69,7 @@ router.post('/removeBook', (req, res) => {
     Book.findOneAndRemove({ isbn: data.isbn }, function (err) {
         if (err)
             res.status(500).send({ message: "Error" })
-        res.status(200).send()
+        res.status(200).send({ message: "Success" })
     }
     )
 });
@@ -87,7 +113,7 @@ router.post('/register', (req, res) => {
     var user = new User(userData)
     user.save((err, newUser) => {
         if (err)
-            res.status(500).send({ message: "Error Saving User" })
+            res.status(500).send({ message: "Error" })
         var payload = { sub: newUser._id }
         var token = jwt.encode(payload, "123")
         console.log(token)

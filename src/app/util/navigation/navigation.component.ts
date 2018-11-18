@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
+import { NavigationService } from './navigation.service';
 
 @Component({
   selector: 'app-navigation',
@@ -20,7 +21,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private _media$: ObservableMedia,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private navigationService: NavigationService
   ) { }
 
   ngOnInit() {

@@ -12,11 +12,8 @@
                     </mat-form-field>
                     <br>
                     <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="AccountDetails.password" name="password" matInput placeholder="*Password" type="password">
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="AccountDetails.confirm_password" name="password" matInput placeholder="*Confirm Password" type="password">
+                        <input [(ngModel)]="AccountDetails.password" name="password" matInput placeholder="*Password"  [type]="hidePassword ? 'password' : 'text'">
+                        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>                        
                     </mat-form-field>
                     <br>
                     <button (click)="change_details()" mat-raised-button color="primary">Update</button>

@@ -13,7 +13,8 @@
                     </mat-form-field>
                     <br>
                     <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="loginData.password" name="password" matInput placeholder="Password" type="password">
+                        <input [(ngModel)]="loginData.password" name="password" matInput placeholder="Password" [type]="hidePasswordLogin ? 'password' : 'text'">
+                        <mat-icon matSuffix (click)="hidePasswordLogin = !hidePasswordLogin">{{hidePasswordLogin ? 'visibility' : 'visibility_off'}}</mat-icon>                        
                     </mat-form-field>
                     <br>
                     <button (click)="login_post()" mat-raised-button color="primary">Login</button>
@@ -36,11 +37,8 @@
                     </mat-form-field>
                     <br>
                     <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="RegisterData.password" name="password" matInput placeholder="Password" type="password">
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="RegisterData.confirm_password" name="confirm_password" matInput placeholder="Confirm password" type="password">
+                        <input [(ngModel)]="RegisterData.password" name="password" matInput placeholder="Password"  [type]="hidePasswordRegister ? 'password' : 'text'">
+                        <mat-icon matSuffix (click)="hidePasswordRegister = !hidePasswordRegister">{{hidePasswordRegister ? 'visibility' : 'visibility_off'}}</mat-icon>
                     </mat-form-field>
                     <br>
                     <button (click)="register_post()" mat-raised-button color="primary">Register</button>

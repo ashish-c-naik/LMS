@@ -5,9 +5,9 @@
   .example-header-image {
     background-image: url('../../assets/book.jpg');
     background-size: cover;
+    display: inline-block;
     width: 100px;
     height: 150px;
-    float: left;
     border-radius: 0px;
   }
 .paginator > * {
