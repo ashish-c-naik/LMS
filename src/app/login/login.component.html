@@ -1,6 +1,11 @@
 <div style="display: block;height: 80vh;" fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="20px">
-    <div class="same_height">
-        <mat-card>
+    <div class="same_height" fxLayout="column" fxLayoutGap="30px">
+        <mat-card style=" background: #D1C4E9">
+            <mat-card-content>
+                Already have an account?
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="card_same_height">
             <mat-card-header>
                 <mat-card-title>
                     <h4>Login</h4>
@@ -9,22 +14,31 @@
             <mat-card-content>
                 <form class="example-form">
                     <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="loginData.email" name="email" matInput placeholder="Email" type="email">
+                        <input [(ngModel)]="loginData.email" name="email" matInput placeholder="Email" type="email" [formControl]="email1" required>
+                        <mat-error *ngIf="email1.invalid">{{getErrorMessageEmail1()}}</mat-error>
                     </mat-form-field>
                     <br>
                     <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="loginData.password" name="password" matInput placeholder="Password" [type]="hidePasswordLogin ? 'password' : 'text'">
-                        <mat-icon matSuffix (click)="hidePasswordLogin = !hidePasswordLogin">{{hidePasswordLogin ? 'visibility' : 'visibility_off'}}</mat-icon>                        
+                        <input #input1 [(ngModel)]="loginData.password" name="password" matInput placeholder="Password" [type]="hidePasswordLogin ? 'password' : 'text'"
+                            [formControl]="password1" required>
+                        <mat-icon style="cursor: pointer;" matSuffix (click)="hidePasswordLogin = !hidePasswordLogin">{{hidePasswordLogin ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-hint align="end">Count: {{input1.value?.length || 0}}</mat-hint>
+                        <mat-error *ngIf="password1.invalid">{{getErrorMessagPassword1()}}</mat-error>
                     </mat-form-field>
                     <br>
-                    <button (click)="login_post()" mat-raised-button color="primary">Login</button>
+                    <button (click)="login_post()" style="margin-top: 20px;" mat-raised-button color="primary">Login</button>
                 </form>
             </mat-card-content>
         </mat-card>
     </div>
     <div class="draw_line"></div>
-    <div class="same_height margin">
-        <mat-card>
+    <div class="same_height margin" fxLayout="column" fxLayoutGap="30px">
+        <mat-card style=" background: #D1C4E9">
+            <mat-card-content>
+                Not a member yet?
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="card_same_height">
             <mat-card-header>
                 <mat-card-title>
                     <h4>Register</h4>
@@ -33,15 +47,20 @@
             <mat-card-content>
                 <form class="example-form">
                     <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="RegisterData.email" name="email" matInput placeholder="Email" type="email">
+                        <input matInput placeholder="Email" [formControl]="email" required>
+                        <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
                     </mat-form-field>
                     <br>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="RegisterData.password" name="password" matInput placeholder="Password"  [type]="hidePasswordRegister ? 'password' : 'text'">
-                        <mat-icon matSuffix (click)="hidePasswordRegister = !hidePasswordRegister">{{hidePasswordRegister ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <mat-form-field class="example-full-width" hintLabel="Minimum 6 characters long">
+                        <input #input [(ngModel)]="RegisterData.password" name="password" matInput placeholder="Password" [type]="hidePasswordRegister ? 'password' : 'text'"
+                            [formControl]="password" required>
+                        <mat-icon style="cursor: pointer;" matSuffix (click)="hidePasswordRegister = !hidePasswordRegister">{{hidePasswordRegister ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-hint align="end">Count: {{input.value?.length || 0}}</mat-hint>
+                        <!-- Must contain at least one number and one uppercase and lowercase letter -->
+                        <mat-error *ngIf="password.invalid">{{getErrorMessagPassword()}}</mat-error>
                     </mat-form-field>
                     <br>
-                    <button (click)="register_post()" mat-raised-button color="primary">Register</button>
+                    <button (click)="register_post()" style="margin-top: 20px;" mat-raised-button color="primary">Register</button>
                 </form>
             </mat-card-content>
         </mat-card>

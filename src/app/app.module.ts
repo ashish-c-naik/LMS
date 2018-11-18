@@ -29,6 +29,7 @@ import { MessageComponent } from './message/message.component';
 import { SnackbarComponent } from './message/message-snackbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NavigationService } from './util/navigation/navigation.service';
+import { ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -43,9 +44,11 @@ import { NavigationService } from './util/navigation/navigation.service';
     AccountDetailsComponent,
     RegisterBookComponent,
     MessageComponent,
-    SnackbarComponent
+    SnackbarComponent,
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
     MatSnackBarModule,
     MatTableModule,
     MatDialogModule,

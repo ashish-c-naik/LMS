@@ -7,7 +7,7 @@
               [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
 </div>
-<mat-grid-list cols="5">
+<mat-grid-list cols="5" style="margin-top:15px;">
     <mat-grid-tile *ngFor='let book of _bookService.books' [colspan]="1" [rowspan]="1.5">
         <mat-card class="example-card">
               <div style="width: 100%; text-align: center;">

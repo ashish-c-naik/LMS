@@ -1,12 +1,15 @@
-.same_height > mat-card{
+.same_height > .card_same_height{
     height: 300px;
 }
 .draw_line {
     margin-left:50px;
-    height: 400px;
+    height: 97vh;
     border: 0.2px solid slategray;
     width:0.5px;
 }
+mat-form-field {
+    margin: 10px;
+}
 .margin {
-    margin-left:50px;
+    margin-left: 50px;
 }

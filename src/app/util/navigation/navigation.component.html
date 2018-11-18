@@ -90,17 +90,17 @@
           <span class="text_content"> Regsiter book </span>
         </div>
         <br *ngIf="authService.Admin">
-        <div class="content" *ngIf="authService.isAuthenticated" [routerLink]="['/account_details']">
+        <div class="content" *ngIf="authService.isAuthenticated" [routerLink]="['/account_details']" style="cursor: pointer;">
           <mat-icon>account_circle</mat-icon>
           <span class="text_content"> Account details </span>
         </div>
         <br *ngIf="authService.isAuthenticated">
-        <div class="content" *ngIf="authService.isAuthenticated" [routerLink]="['/issue_history']">
+        <div class="content" *ngIf="authService.isAuthenticated" [routerLink]="['/issue_history']" style="cursor: pointer;">
           <mat-icon>history</mat-icon>
           <span class="text_content"> Issue history </span>
         </div>
         <br *ngIf="authService.isAuthenticated">
-        <div class="content" (click)="show=!show">
+        <div class="content" (click)="show=!show" style="cursor: pointer;">
           <mat-icon>dashboard</mat-icon>
           <span class="text_content"> Browse </span>
           <mat-icon *ngIf="!show" class="icon_content">keyboard_arrow_down
@@ -108,7 +108,7 @@
           <mat-icon *ngIf="show" class="icon_content">keyboard_arrow_up
           </mat-icon>
         </div>
-        <div *ngIf="show" class="">
+        <div *ngIf="show" class="" style="cursor: pointer;">
           <a class="content" [routerLink]="['/browse', 'mat']">Mathematics</a>
           <br>
           <a class="content" [routerLink]="['/browse', 'sci']">Science</a>
@@ -129,17 +129,17 @@
           <br>
         </div>
         <br *ngIf="!authService.isAuthenticated">
-        <div class="content" *ngIf="!authService.isAuthenticated" [routerLink]="['/login']">
+        <div class="content" *ngIf="!authService.isAuthenticated" [routerLink]="['/login']" style="cursor: pointer;">
           <mat-icon>account_box</mat-icon>
           <span class="text_content">Login</span>
         </div>
         <br *ngIf="!authService.isAuthenticated">
-        <div class="content" *ngIf="!authService.isAuthenticated" [routerLink]="['/login']">
+        <div class="content" *ngIf="!authService.isAuthenticated" [routerLink]="['/login']" style="cursor: pointer;">
           <mat-icon>note_add</mat-icon>
           <span class="text_content">Register</span>
         </div>
         <br *ngIf="authService.isAuthenticated">
-        <div class="content" *ngIf="authService.isAuthenticated" (click)="this.authService.logout()">
+        <div class="content" *ngIf="authService.isAuthenticated" (click)="this.authService.logout()" style="cursor: pointer;">
           <mat-icon>power_settings_new</mat-icon>
           <span class="text_content">Logout</span>
         </div>

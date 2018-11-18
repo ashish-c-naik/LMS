@@ -27,8 +27,8 @@ export class RegisterBookComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.navigationService.showLogin = false;
-    this.navigationService.showRegister = false;
+    this.navigationService.showLogin = true;
+    this.navigationService.showRegister = true;
     this.navigationService.showSearch = false;
   }
   register_post() {
