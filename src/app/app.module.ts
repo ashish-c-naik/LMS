@@ -8,7 +8,7 @@ import { MatMenuModule, MatButtonModule,
   MatIconModule, MatToolbarModule, MatListModule,
   MatCheckboxModule, MatFormFieldModule, MatInputModule,
   MatCardModule, MatGridListModule, MatPaginatorModule, MatDialogModule,
-  MatTableModule, MatRadioModule, MatSelectModule} from '@angular/material';
+  MatTableModule, MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatTooltipModule} from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
 import { NavigationComponent } from './util/navigation/navigation.component';
@@ -76,7 +76,9 @@ import { ThemeService } from './theme.service';
     MatGridListModule,
     MatPaginatorModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatTooltipModule
   ],
   entryComponents: [
     DialogComponent,

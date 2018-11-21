@@ -89,6 +89,13 @@ export class AuthService {
         });
     }
 
+    updateBook (data) {
+        this.http.post<any>(this.path + '/updateBook', data).subscribe(res => {
+                this._statusService.displayStatus('Book Updated.', 'success');
+                this.routeReload();
+        });
+    }
+
     makeIssue( data ) {
         this.http.post<any>(this.path + '/makeIssue', data)
         .subscribe(res => {

@@ -60,13 +60,13 @@
       Library Management System
     </h1>
     <span class="right-spacer"></span>
-    <button mat-stroked-button style="margin-right:15px;" (click)='themeService.changeTheme()'>Change Theme</button>
+    <!-- <button mat-stroked-button style="margin-right:15px;" (click)='themeService.changeTheme()'>Change Theme</button> -->
     <form class="example-form" *ngIf="navigationService.showRegister">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Search" list="books">
-        <datalist id="books">
+        <!-- <datalist id="books">
           <option value="Out of box"></option>
-        </datalist>
+        </datalist> -->
       </mat-form-field>
       <button mat-button>
         <mat-icon>search</mat-icon>
@@ -81,10 +81,12 @@
     <a class="header_link" *ngIf="!authService.isAuthenticated&&navigationService.showRegister" [routerLink]="['/login']">
       Register
     </a>
+    <mat-slide-toggle matTooltip="Change theme" style="font-size: 0.7em;margin-left:15px;" [checked] = 'themeService.switch' [(ngModel)]='themeService.switch'></mat-slide-toggle>    
   </mat-toolbar>
   <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav #snav [mode]="side" fixedTopGap="62" fixedInViewport="true" [attr.role]="(media === 'xs' || media === 'sm') ? 'dialog' : 'navigation'"
-      mode="side" [opened]="false" (window:resize)="onResize($event)">
+    <mat-sidenav #snav mode="over" fixedTopGap="62" fixedInViewport="true" 
+    [attr.role]="(media === 'xs' || media === 'sm') ? 'dialog' : 'navigation'" 
+    [opened]="false" (window:resize)="onResize($event)">
       <mat-nav-list class="left_nav_list">
         <div class="content" *ngIf="authService.Admin" [routerLink]="['/register_book']">
           <mat-icon>book</mat-icon>

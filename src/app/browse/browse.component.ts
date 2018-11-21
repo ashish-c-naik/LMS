@@ -31,12 +31,13 @@ export interface DialogUpdateDate {
 export class BrowseComponent implements OnInit {
   pagetitle = 'Mathematics';
   pageEvent: PageEvent;
-  checkout_email = localStorage.getItem('email');
+  checkout_email =  localStorage.getItem('email');
 
   title: string;
   author: string;
-  id: string;
-  category: CategoryEnum;
+  id: number;
+  category: string;
+  location: string;
   availability: number;
 
   constructor(
@@ -47,7 +48,6 @@ export class BrowseComponent implements OnInit {
     private route: ActivatedRoute,
     private _bookService: BookService,
     private router: Router,
-    location: Location,
     private navigationService: NavigationService,
     private statusService: StatusService
   ) {
@@ -105,7 +105,7 @@ export class BrowseComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      if (result === false) {
+      if (result === false || result === undefined) {
         this.statusService.displayStatus('Cancelled the operation', 'info');
       } else {
         this.checkout_email = result;
@@ -126,7 +126,7 @@ export class BrowseComponent implements OnInit {
 
     dialogRef1.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      if (result === false) {
+      if (result === false || result === undefined) {
         this.statusService.displayStatus('Cancelled the operation', 'info');
       } else {
         this.remove(data);
@@ -135,17 +135,19 @@ export class BrowseComponent implements OnInit {
   }
 
   openDialog2(data): void {
+    console.log(data);
     const dialogRef2 = this.dialog2.open(DialogUpdateComponent, {
       width: '250px',
-      data: { data: data }
+      data: { data: JSON.parse(JSON.stringify(data)) }
     });
 
     dialogRef2.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      if (result === false) {
+      if (result === false || result === undefined) {
         this.statusService.displayStatus('Cancelled the operation', 'info');
       } else {
-        //
+        // console.log(result);
+        this._authService.updateBook(result.data);
       }
     });
   }
@@ -214,7 +216,7 @@ export class Dialog2Component {
   selector: 'app-dialog',
   template: `
   <div >
-    <h1 mat-dialog-title>Update</h1>
+    <h1 mat-dialog-title>Update details: Book Id - {{data.data.isbn}}</h1>
       <div mat-dialog-content>
         <mat-form-field>
           <input matInput [(ngModel)]="data.data.title" placeholder="book title" [formControl]="title" required>
@@ -224,10 +226,11 @@ export class Dialog2Component {
           <input matInput [(ngModel)]="data.data.author" placeholder="Author" [formControl]="author" required>
           <mat-error *ngIf="author.invalid">{{getErrorMessageAuthor()}}</mat-error>
         </mat-form-field>
-        <mat-form-field hintLabel="Please enter only numbers">
-          <input matInput [(ngModel)]="data.data.id" placeholder="Book Id" [formControl]="isbn" required>
+        <!-- <mat-form-field hintLabel="Please enter only numbers">
+        Book -{{data.data.isbn}}
+        <input matInput [(ngModel)]="data.data.isbn" placeholder="Book Id" [formControl]="isbn" required>
           <mat-error *ngIf="isbn.invalid">{{getErrorMessageISBN()}}</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field>
           <mat-select placeholder="Select a category" name="category" [(ngModel)]="data.data.category" [formControl]="category" required>
             <mat-option value="mat">Mathematics</mat-option>
@@ -264,9 +267,12 @@ export class Dialog2Component {
       </div>
       <div mat-dialog-actions>
         <button mat-button (click)="dialogRef2.close(false)">No Thanks</button>
-        <button mat-button [disabled]="this.title.status !== 'VALID' ||  this.author.status !== 'VALID' ||
-        this.isbn.status !== 'VALID' || this.category.status !== 'VALID' ||
-        this.location.status !== 'VALID' || this.availability.status !== 'VALID'"
+        <button mat-button
+        [disabled]="this.title.status !== 'VALID' ||
+        this.author.status !== 'VALID' ||
+        this.category.status !== 'VALID' ||
+        this.location.status !== 'VALID' ||
+        this.availability.status !== 'VALID'"
         (click)="dialogRef2.close(data)" cdkFocusInitial>Ok</button>
       </div>
 </div>`,
@@ -279,7 +285,7 @@ styles: [`
 export class DialogUpdateComponent {
   title = new FormControl('', [Validators.required]);
   author = new FormControl('', [Validators.required]);
-  isbn  = new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]);
+  // isbn  = new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]);
   category = new FormControl('', [Validators.required]);
   location = new FormControl('', [Validators.required]);
   availability = new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]);
@@ -295,11 +301,11 @@ export class DialogUpdateComponent {
         '';
   }
 
-  getErrorMessageISBN() {
-    return this.isbn.hasError('required') ? 'You must enter a value' :
-    this.title.hasError('pattern') ? 'Invalid ISBN' :
-        '';
-  }
+  // getErrorMessageISBN() {
+  //   return this.isbn.hasError('required') ? 'You must enter a value' :
+  //   this.title.hasError('pattern') ? 'Invalid ISBN' :
+  //       '';
+  // }
 
   getErrorMessageCategory() {
     return this.category.hasError('required') ? 'You must enter a value' :

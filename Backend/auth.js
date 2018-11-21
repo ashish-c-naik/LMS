@@ -63,6 +63,26 @@ router.post('/makeIssue', (req, res) => {
     })
 });
 
+router.post('/updateBook', (req, res) => {
+    var data = req.body
+    Book.findOne({ isbn: data.isbn }, function (err, obj) {
+        if (err || obj == null)
+            res.status(500).send({ message: "Error" })
+        else {
+            obj.author = data.author
+            obj.title = data.title
+            obj.location = data.location
+            obj.category = data.category
+            obj.availability = data.availability
+            obj.save((err, obj) => {
+                if (err)
+                    res.status(500).send({ message: "Error" })
+                res.status(200).send({ message: "Success" })
+            })
+        }
+    }
+    )
+});
 
 router.post('/removeBook', (req, res) => {
     var data = req.body
