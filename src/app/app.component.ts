@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
+import { ThemeService } from './theme.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,8 @@ import { MatSidenav } from '@angular/material';
 })
 export class AppComponent {
   title = 'KASND';
+
+  constructor (
+    private themeService: ThemeService
+  ) {}
 }

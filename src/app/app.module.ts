@@ -15,11 +15,11 @@ import { NavigationComponent } from './util/navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { BrowseComponent, DialogComponent } from './browse/browse.component';
+import { BrowseComponent, DialogComponent, Dialog2Component, DialogUpdateComponent } from './browse/browse.component';
 import { AuthService } from './auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './authInterceptor.service';
-import { IssueHistoryComponent } from './issue-history/issue-history.component';
+import { IssueHistoryComponent, Dialog1Component } from './issue-history/issue-history.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { RegisterBookComponent } from './register-book/register-book.component';
 import { AuthGuard } from './auth.guard';
@@ -30,6 +30,7 @@ import { SnackbarComponent } from './message/message-snackbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NavigationService } from './util/navigation/navigation.service';
 import { ReactiveFormsModule} from '@angular/forms';
+import { ThemeService } from './theme.service';
 
 
 
@@ -41,6 +42,9 @@ import { ReactiveFormsModule} from '@angular/forms';
     BrowseComponent,
     IssueHistoryComponent,
     DialogComponent,
+    Dialog2Component,
+    Dialog1Component,
+    DialogUpdateComponent,
     AccountDetailsComponent,
     RegisterBookComponent,
     MessageComponent,
@@ -76,7 +80,10 @@ import { ReactiveFormsModule} from '@angular/forms';
   ],
   entryComponents: [
     DialogComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    Dialog1Component,
+    Dialog2Component,
+    DialogUpdateComponent
   ],
   providers: [AuthService, {
     provide: HTTP_INTERCEPTORS,
@@ -84,8 +91,10 @@ import { ReactiveFormsModule} from '@angular/forms';
     multi: true
   }, AuthGuard, AuthGuardLogin,
   BookService,
-  NavigationService
+  NavigationService,
+  ThemeService
 ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+ }

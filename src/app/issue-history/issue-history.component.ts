@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from '../auth.service';
 import { BookService } from '../book.service';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { NavigationService } from '../util/navigation/navigation.service';
+import { DialogData } from '../browse/browse.component';
+import { FormControl, Validators } from '@angular/forms';
+import { StatusService } from '../message/status.service';
 
 export interface TableElement {
   position: number;
@@ -52,10 +55,12 @@ export class IssueHistoryComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   constructor(
+    public dialog: MatDialog,
     private _authService: AuthService,
     private _bookService: BookService,
     private http: HttpClient,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private statusService: StatusService
   ) {
   }
 
@@ -77,8 +82,6 @@ export class IssueHistoryComponent implements OnInit {
       this.displayedColumns.push('email');
       this.displayedColumns.push('return');
     }
-    // this.dataSource.sort = this.sort;
-    // this.dataSource.paginator = this.paginator;
   }
   getFine(due: string) {
     const todayDate = new Date();
@@ -94,4 +97,45 @@ export class IssueHistoryComponent implements OnInit {
   return(isbn: number) {
     this._authService.removeIssues({isbn: isbn});
   }
+  openDialog(isbn): void {
+    const dialogRef = this.dialog.open(Dialog1Component, {
+      width: '250px',
+      data: { }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result) {
+        this.return (isbn);
+      } else {
+        this.statusService.displayStatus('Cancelled the operation', 'info');
+      }
+    });
+  }
+}
+@Component({
+  selector: 'app-dialog',
+  template: `
+  <div >
+    <h1 mat-dialog-title>Checkout</h1>
+      <div mat-dialog-content>
+        <p>Are you sure?</p>
+      <div mat-dialog-actions>
+        <button mat-button (click)="dialogRef.close(false)">No Thanks</button>
+        <button mat-button (click)="dialogRef.close(true)" cdkFocusInitial>Ok</button>
+      </div>
+</div>`,
+})
+export class Dialog1Component {
+  constructor(
+    private _authService: AuthService,
+    public dialogRef: MatDialogRef<Dialog1Component>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close(false);
+  }
+
 }

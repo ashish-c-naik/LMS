@@ -1,11 +1,11 @@
-<div style="background: rgb(255,250,250); height: 30px; text-align: center;padding: 5px;">
+<div style=" height: 30px; text-align: center;padding: 5px;">
   <span style="font-size: 25px;">Issue History</span>
 </div>
 <div>
-  <mat-form-field style="width: 50%;background: rgb(255,250,250)">
+  <mat-form-field style="width: 50%;">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter the table (using any data you wish..)">
   </mat-form-field>
-  <mat-paginator style="width: 50%; float:right; background: rgb(255,250,250);" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <mat-paginator style="float:right; background: none; width: 50%;" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>    
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -56,7 +56,7 @@
   <ng-container *ngIf="_authService.Admin" matColumnDef="return">
     <th mat-header-cell *matHeaderCellDef> Return </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-stroked-button color="warn" (click)="return(element.isbn)">Return</button>
+      <button mat-stroked-button color="warn" (click)="openDialog(element.isbn)">Return</button>
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

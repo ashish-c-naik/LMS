@@ -4,6 +4,7 @@ import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { NavigationService } from './navigation.service';
+import { ThemeService } from '../../theme.service';
 
 @Component({
   selector: 'app-navigation',
@@ -17,12 +18,14 @@ export class NavigationComponent implements OnInit {
   islogged = this.authService.isAuthenticated;
   opened: boolean;
   private media: string;
+  switch = false;
   @ViewChild('snav') sideNav: MatSidenav;
   constructor(
     private _media$: ObservableMedia,
     private authService: AuthService,
     private router: Router,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit() {

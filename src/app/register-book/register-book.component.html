@@ -1,4 +1,4 @@
-<div style="display: block;height: 80vh;" fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="20px">
+<div style="display: block;height: 100vh; margin-top:35px;" fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="20px">
     <mat-card>
         <mat-card-header>
             <mat-card-title>
@@ -8,19 +8,22 @@
         <mat-card-content>
             <form class="example-form">
                 <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="RegisterBook.title" name="title" matInput placeholder="Title" type="name">
+                    <input [(ngModel)]="RegisterBook.title" name="title" matInput placeholder="Title" type="name" [formControl]="title" required>
+                    <mat-error *ngIf="title.invalid">{{getErrorMessageTitle()}}</mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="RegisterBook.author" name="author" matInput placeholder="Author" type="name">
+                    <input [(ngModel)]="RegisterBook.author" name="author" matInput placeholder="Author" type="name" [formControl]="author" required>
+                    <mat-error *ngIf="author.invalid">{{getErrorMessageAuthor()}}</mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width" hintLabel="Please enter only numbers">
+                    <input [(ngModel)]="RegisterBook.isbn" name="id" matInput placeholder="Book Id" type="name" [formControl]="isbn" required>
+                    <mat-error *ngIf="isbn.invalid">{{getErrorMessageISBN()}}</mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="RegisterBook.isbn" name="id" matInput placeholder="Book Id" type="name">
-                </mat-form-field>
-                <br>
-                <mat-form-field class="example-full-width">
-                        <mat-select placeholder="Select a category" name="category" [(ngModel)]="RegisterBook.category">
+                        <mat-select placeholder="Select a category" name="category" [(ngModel)]="RegisterBook.category" [formControl]="category" required>
                             <mat-option value="mat">Mathematics</mat-option>
                             <mat-option value="sci">Science</mat-option>
                             <mat-option value="tec">Technology</mat-option>
@@ -32,29 +35,31 @@
                             <mat-option value="mis">Miscellaneous</mat-option>
                         </mat-select>
                     <!-- <input  name="category" matInput placeholder="Category" type="name"> -->
+                    <mat-error *ngIf="category.invalid">{{getErrorMessageCategory()}}</mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field class="example-full-width">
-                        <mat-select placeholder="Select a location" name="location" [(ngModel)]="RegisterBook.location">
-                            <mat-option value="1">1</mat-option>
-                            <mat-option value="2">2</mat-option>
-                            <mat-option value="3">3</mat-option>
-                            <mat-option value="4">4</mat-option>
-                            <mat-option value="5">5</mat-option>
-                            <mat-option value="6">6</mat-option>
-                            <mat-option value="7">7</mat-option>
-                            <mat-option value="8">8</mat-option>
-                            <mat-option value="9">9</mat-option>
-                            <mat-option value="10">10</mat-option>
-                        </mat-select>
-                    <!-- <input [(ngModel)]="RegisterBook.location" name="location" matInput placeholder="Location" type="name"> -->
+                    <mat-select placeholder="Select a location" name="location" [(ngModel)]="RegisterBook.location" [formControl]="location" required>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                        <mat-option value="4">4</mat-option>
+                        <mat-option value="5">5</mat-option>
+                        <mat-option value="6">6</mat-option>
+                        <mat-option value="7">7</mat-option>
+                        <mat-option value="8">8</mat-option>
+                        <mat-option value="9">9</mat-option>
+                        <mat-option value="10">10</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="location.invalid">{{getErrorMessageLocation()}}</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="RegisterBook.availability" name="availability" matInput placeholder="Availability" type="name">
+                <mat-form-field class="example-full-width" hintLabel="Please enter only numbers">
+                    <input [(ngModel)]="RegisterBook.availability" name="availability" matInput placeholder="Availability" type="name" [formControl]="availability" required>
+                    <mat-error *ngIf="availability.invalid">{{getErrorMessageAvailability()}}</mat-error>
                 </mat-form-field>
                 <br>
-                <button (click)="register_post()" mat-raised-button color="primary">Register</button>
+                <button (click)="register_post()" style="margin-top: 20px;" mat-raised-button color="primary">Register</button>
             </form>
         </mat-card-content>
     </mat-card>

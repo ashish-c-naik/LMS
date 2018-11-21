@@ -1,6 +1,6 @@
 <div style="display: block;height: 80vh;" fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="20px">
     <div class="same_height" fxLayout="column" fxLayoutGap="30px">
-        <mat-card style=" background: #D1C4E9">
+        <mat-card>
             <mat-card-content>
                 Already have an account?
             </mat-card-content>
@@ -23,7 +23,7 @@
                             [formControl]="password1" required>
                         <mat-icon style="cursor: pointer;" matSuffix (click)="hidePasswordLogin = !hidePasswordLogin">{{hidePasswordLogin ? 'visibility_off' : 'visibility'}}</mat-icon>
                         <mat-hint align="end">Count: {{input1.value?.length || 0}}</mat-hint>
-                        <mat-error *ngIf="password1.invalid">{{getErrorMessagPassword1()}}</mat-error>
+                        <mat-error *ngIf="password1.invalid">{{getErrorMessagePassword1()}}</mat-error>
                     </mat-form-field>
                     <br>
                     <button (click)="login_post()" style="margin-top: 20px;" mat-raised-button color="primary">Login</button>
@@ -33,7 +33,7 @@
     </div>
     <div class="draw_line"></div>
     <div class="same_height margin" fxLayout="column" fxLayoutGap="30px">
-        <mat-card style=" background: #D1C4E9">
+        <mat-card>
             <mat-card-content>
                 Not a member yet?
             </mat-card-content>
@@ -47,17 +47,16 @@
             <mat-card-content>
                 <form class="example-form">
                     <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Email" [formControl]="email" required>
+                        <input [(ngModel)]="RegisterData.email" matInput placeholder="Email" [formControl]="email" required>
                         <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
                     </mat-form-field>
                     <br>
                     <mat-form-field class="example-full-width" hintLabel="Minimum 6 characters long">
-                        <input #input [(ngModel)]="RegisterData.password" name="password" matInput placeholder="Password" [type]="hidePasswordRegister ? 'password' : 'text'"
-                            [formControl]="password" required>
+                        <input #input [(ngModel)]="RegisterData.password" name="password" matInput placeholder="Password" [type]="hidePasswordRegister ? 'password' : 'text'" [formControl]="password" required>
                         <mat-icon style="cursor: pointer;" matSuffix (click)="hidePasswordRegister = !hidePasswordRegister">{{hidePasswordRegister ? 'visibility_off' : 'visibility'}}</mat-icon>
                         <mat-hint align="end">Count: {{input.value?.length || 0}}</mat-hint>
                         <!-- Must contain at least one number and one uppercase and lowercase letter -->
-                        <mat-error *ngIf="password.invalid">{{getErrorMessagPassword()}}</mat-error>
+                        <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
                     </mat-form-field>
                     <br>
                     <button (click)="register_post()" style="margin-top: 20px;" mat-raised-button color="primary">Register</button>

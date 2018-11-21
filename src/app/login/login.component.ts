@@ -24,30 +24,28 @@ export class LoginComponent implements OnInit {
   hidePasswordLogin = true;
   email = new FormControl('', [Validators.required, Validators.email]);
   email1 = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required,
-    Validators.pattern('.{6,}')]);
-  password1 = new FormControl('', [Validators.required,
-      Validators.pattern('.{6,}')]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  password1 = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
-    getErrorMessageEmail() {
-      return this.email.hasError('required') ? 'You must enter a value' :
-          this.email.hasError('email') ? 'Not a valid email' :
-              '';
-    }
-    getErrorMessageEmail1() {
-      return this.email1.hasError('required') ? 'You must enter a value' :
-          this.email1.hasError('email') ? 'Not a valid email' :
-              '';
-    }
-  getErrorMessagPassword() {
-    return this.password.hasError('required') ? 'You must enter a value' :
-        this.password.hasError('pattern') ? 'Not a valid password' :
-            '';
+  getErrorMessageEmail() {
+    return this.email.hasError('required') ? 'You must enter a value' :
+      this.email.hasError('email') ? 'Not a valid email' :
+        '';
   }
-  getErrorMessagPassword1() {
+  getErrorMessageEmail1() {
+    return this.email1.hasError('required') ? 'You must enter a value' :
+      this.email1.hasError('email') ? 'Not a valid email' :
+        '';
+  }
+  getErrorMessagePassword() {
+    return this.password.hasError('required') ? 'You must enter a value' :
+      this.password.hasError('minLength') ? 'Minimum length of password must be 6' :
+        '';
+  }
+  getErrorMessagePassword1() {
     return this.password1.hasError('required') ? 'You must enter a value' :
-        this.password1.hasError('pattern') ? 'Not a valid password' :
-            '';
+      this.password1.hasError('minLength') ? 'Minimum length of password must be 6' :
+        '';
   }
   constructor(private authService: AuthService,
     private router: Router,
@@ -63,18 +61,22 @@ export class LoginComponent implements OnInit {
     this.navigationService.showSearch = false;
   }
   register_post() {
-    if ( this.email.status === 'VALID' && this.password.status === 'VALID' ) {
+    if (this.email.status === 'VALID' && this.password.status === 'VALID') {
       this.authService.registerUser(this.RegisterData);
       this.router.navigateByUrl(this.return);
     } else {
-      this.statusService.displayStatus('There are errors in the form', 'warning');
+      this.statusService.displayStatus('There are errors in the register form', 'warning');
     }
   }
   login_post() {
-    this.authService.loginUser(this.loginData);
-    this.router.navigateByUrl(this.return);
+    if (this.email1.status === 'VALID' && this.password1.status === 'VALID') {
+      this.authService.loginUser(this.loginData);
+      this.router.navigateByUrl(this.return);
+    } else {
+      this.statusService.displayStatus('There are errors in the Login form', 'warning');
+    }
   }
-  onDestroy () {
+  onDestroy() {
     this.navigationService.showLogin = true;
     this.navigationService.showRegister = true;
   }
