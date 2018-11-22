@@ -8,6 +8,7 @@ import { AccountDetailsComponent } from './account-details/account-details.compo
 import { RegisterBookComponent } from './register-book/register-book.component';
 import { AuthGuard } from './auth.guard';
 import { AuthGuardLogin } from './auth.guard.login';
+import { CategoryComponent } from './browse/category/category.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'browse/:id',
     component: BrowseComponent
+  },
+  {
+    path: 'browse',
+    component: CategoryComponent
   },
   {
     path: '**',

@@ -98,12 +98,12 @@
           <span class="text_content"> Regsiter book </span>
         </div>
         <br *ngIf="authService.Admin">
-        <div class="content" (click)="show=!show" style="cursor: pointer;">
+        <div class="content" >
           <mat-icon>dashboard</mat-icon>
-          <span class="text_content"> Browse </span>
-          <mat-icon *ngIf="!show" class="icon_content">keyboard_arrow_down
+          <span class="text_content" style="cursor: pointer;" [routerLink]="['/browse']"> Browse </span>
+          <mat-icon *ngIf="!show" style="cursor: pointer;" (click)="show=!show" class="icon_content">keyboard_arrow_down
           </mat-icon>
-          <mat-icon *ngIf="show" class="icon_content">keyboard_arrow_up
+          <mat-icon *ngIf="show" style="cursor: pointer;" (click)="show=!show" class="icon_content">keyboard_arrow_up
           </mat-icon>
         </div>
         <div *ngIf="show" class="" style="cursor: pointer;">

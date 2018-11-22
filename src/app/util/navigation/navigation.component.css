@@ -123,6 +123,9 @@
   .icon_content{
     margin-left:70px;
   }
+  .icon_content:hover {
+    background: rgba(1, 1, 1, 0.5);
+  }
   .header_link {
     color: white;
     text-decoration: none;

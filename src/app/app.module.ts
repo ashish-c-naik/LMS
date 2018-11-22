@@ -32,6 +32,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NavigationService } from './util/navigation/navigation.service';
 import { ReactiveFormsModule} from '@angular/forms';
 import { ThemeService } from './theme.service';
+import { CategoryComponent } from './browse/category/category.component';
 
 
 
@@ -50,6 +51,7 @@ import { ThemeService } from './theme.service';
     RegisterBookComponent,
     MessageComponent,
     SnackbarComponent,
+    CategoryComponent,
   ],
   imports: [
     ReactiveFormsModule,

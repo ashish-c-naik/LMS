@@ -1,0 +1,12 @@
+<div style="margin-top:20px;display: flex;flex-wrap: wrap;justify-content: space-between;align-items:strech;flex-flow: row wrap;padding: 0 280px 0 280px;">
+  <div *ngFor='let child of links'>
+    <mat-card class="example-card" style="width: 200px;margin: 5px 0px 5px 5px;cursor: pointer;" [routerLink]="[child.link]">
+      <div style="text-align: center;">
+        <div class="example-header-image" [ngStyle]="{'background-image':'url('+ child.url +')'}"> </div>
+      </div>
+      <mat-card-content style="text-align: center;">
+        <mat-card-title> {{child.name}}</mat-card-title>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -164,12 +164,12 @@ export class BrowseComponent implements OnInit {
       <div mat-dialog-content>
         <p>Enter your email id to checkout!</p>
         <mat-form-field>
-          <input matInput [(ngModel)]="data.email" [formControl]="email" required>
+          <input matInput [(ngModel)]="data.email" [disabled]="!_authService.isAuthenticated" [formControl]="email" required>
           <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
         </mat-form-field>
       </div>
       <div mat-dialog-actions>
-        <button mat-button (click)="dialogRef.close(false)">No Thanks</button>
+        <button mat-button (click)="dialogRef.close(false)">Cancel</button>
         <button mat-button [disabled]="email.status !== 'VALID'" (click)="dialogRef.close(data.email)" cdkFocusInitial>Ok</button>
       </div>
 </div>`,
@@ -202,7 +202,7 @@ export class DialogComponent {
         <p>Are you sure?</p>
       </div>
       <div mat-dialog-actions>
-        <button mat-button (click)="dialogRef1.close(false)">No Thanks</button>
+        <button mat-button (click)="dialogRef1.close(false)">Cancel</button>
         <button mat-button (click)="dialogRef1.close(true)" cdkFocusInitial>Ok</button>
       </div>
 </div>`,
@@ -223,7 +223,7 @@ export class Dialog2Component {
     <h1 mat-dialog-title>Update details <br> Book Id - {{data.data.isbn}}</h1>
       <div mat-dialog-content>
         <mat-form-field>
-          <input matInput [(ngModel)]="data.data.title" placeholder="book title" [formControl]="title" required>
+          <input matInput [(ngModel)]="data.data.title" placeholder="Book title" [formControl]="title" required>
           <mat-error *ngIf="title.invalid">{{getErrorMessageTitle()}}</mat-error>
         </mat-form-field>
         <mat-form-field>
@@ -270,7 +270,7 @@ export class Dialog2Component {
         </mat-form-field>
       </div>
       <div mat-dialog-actions>
-        <button mat-button (click)="dialogRef2.close(false)">No Thanks</button>
+        <button mat-button (click)="dialogRef2.close(false)">Cancel</button>
         <button mat-button
         [disabled]="this.title.status !== 'VALID' ||
         this.author.status !== 'VALID' ||

@@ -2,14 +2,14 @@
   <div style=" height: 30px; text-align: center;padding: 5px; width: 100vw;z-index: 99; top: 80px; ">
     <span style="font-size: 25px;">Checkout history</span>
   </div>
-  <div style=" position: fixed;z-index: 100;top:130px;width: 100vw;">
+  <div style=" position: fixed;z-index: 100;top:130px;width: 100vw;padding: 10px;">
     <mat-form-field style="width: 50%;">
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter the results">
     </mat-form-field>
     <mat-paginator style="float:right; background: none; width: 50%;" (page)="onPaginateChange($event)" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
 </div>
-<div class="example-container mat-elevation-z8" style="margin-top: 150px">
+<div class="example-container mat-elevation-z8" style="margin-top: 150px; margin-right:10px; margin-left:10px;">
 <table mat-table [dataSource]="dataSource">
 
   <!-- Position Column -->

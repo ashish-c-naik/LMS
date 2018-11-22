@@ -1,0 +1,11 @@
+.example-header-image {
+    /* background-image: url('../../../assets/book.jpg'); */
+    background-size: cover;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+  }
+.example-card:hover{
+    background: rgba(1,1,1,0.2);
+}
