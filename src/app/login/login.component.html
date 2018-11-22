@@ -54,7 +54,6 @@
                     <mat-form-field class="example-full-width" hintLabel="Minimum 6 characters long">
                         <input #input [(ngModel)]="RegisterData.password" name="password" matInput placeholder="Password" [type]="hidePasswordRegister ? 'password' : 'text'" [formControl]="password" required>
                         <mat-icon style="cursor: pointer;" matSuffix (click)="hidePasswordRegister = !hidePasswordRegister">{{hidePasswordRegister ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        <mat-error *ngIf="password.invalid && password.untouched" >{{getErrorMessagePassword()}}</mat-error>
                         <mat-hint align="end">Count: {{input.value?.length || 0}}</mat-hint>                        
                     </mat-form-field>
                     <br>

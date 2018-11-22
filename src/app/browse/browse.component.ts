@@ -219,8 +219,8 @@ export class Dialog2Component {
 @Component({
   selector: 'app-dialog',
   template: `
-  <div >
-    <h1 mat-dialog-title>Update details: Book Id - {{data.data.isbn}}</h1>
+  <div>
+    <h1 mat-dialog-title>Update details <br> Book Id - {{data.data.isbn}}</h1>
       <div mat-dialog-content>
         <mat-form-field>
           <input matInput [(ngModel)]="data.data.title" placeholder="book title" [formControl]="title" required>
@@ -282,7 +282,6 @@ export class Dialog2Component {
 </div>`,
   styles: [`
   mat-form-field {
-    margin-top:15px;
   }
 `]
 })

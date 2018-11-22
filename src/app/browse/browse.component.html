@@ -1,8 +1,8 @@
 <div class="paginator mat-drawer-container" style="position: fixed;z-index: 99;right:0;width: 100vw;">
-  <div style="height: 30px;padding: 5px; text-align: center;">
-    <mat-form-field style="position: fixed;left:10px;">
-      <mat-select placeholder="Browse">
-        <mat-option [routerLink]="['/browse', 'mat']">
+  <div style="height:30px;padding: 5px; text-align: center;">
+    <mat-form-field style="font-size: 20px; margin-top:-30px;">
+      <mat-select style="font-size: 15px;" placeholder="{{pagetitle}}">
+        <mat-option  [routerLink]="['/browse', 'mat']">
           Mathematics
         </mat-option>
         <mat-option [routerLink]="['/browse', 'sci']">
@@ -31,13 +31,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <span style="font-size: 25px;">{{pagetitle}}</span>
+    <!-- <span style="font-size: 25px;">{{pagetitle}}</span> -->
   </div>
   <mat-paginator style="border:none;  background: none;" [length]="5" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 </div>
-<mat-grid-list cols="5" style="margin-top:15px;">
-  <mat-grid-tile *ngFor='let book of _bookService.books' [colspan]="1" [rowspan]="1.5">
+<mat-grid-list cols="5" rowHeight="490px" style="margin-top:20px;">
+  <mat-grid-tile *ngFor='let book of _bookService.books' [colspan]="1" [rowspan]="1">
     <mat-card class="example-card">
       <div style="width: 100%; text-align: center;">
         <div class="example-header-image"> </div>

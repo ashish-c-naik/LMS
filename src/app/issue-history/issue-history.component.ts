@@ -46,6 +46,7 @@ export class IssueHistoryComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  index = 0;
   data: TableElement[] = [];
   count = 1;
   displayedColumns: string[] = ['serial', 'isbn', 'title', 'author', 'issue', 'due', 'fine'];
@@ -83,6 +84,18 @@ export class IssueHistoryComponent implements OnInit {
       this.displayedColumns.push('return');
     }
   }
+ OnChanges () {
+  new ExampleHttpDao(this.http).getIssues(localStorage.getItem('email'), localStorage.getItem('admin') === 'True').subscribe(res => {
+    this.data = res;
+    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  });
+ }
+  onPaginateChange (event) {
+    this.index = event.pageIndex * event.pageSize;
+  }
+
   getFine(due: string) {
     const todayDate = new Date();
     const dueDate = new Date(due);
@@ -116,10 +129,11 @@ export class IssueHistoryComponent implements OnInit {
 @Component({
   selector: 'app-dialog',
   template: `
-  <div >
+  <div>
     <h1 mat-dialog-title>Checkout</h1>
-      <div mat-dialog-content>
+      <mat-dialog-content>
         <p>Are you sure?</p>
+      </mat-dialog-content>
       <div mat-dialog-actions>
         <button mat-button (click)="dialogRef.close(false)">No Thanks</button>
         <button mat-button (click)="dialogRef.close(true)" cdkFocusInitial>Ok</button>

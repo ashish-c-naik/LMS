@@ -79,8 +79,9 @@ export class AuthService {
                 localStorage.setItem(this.PASSWORD_KEY, registerData.password);
                 this._statusService.displayStatus('Success registering a book', 'success');
                 this.routeReload();
+                window.location.reload();
         }, (err) => {
-            this._statusService.displayStatus('Error registering the book', 'danger');
+            this._statusService.displayStatus('Error! Already have a book with same Book id', 'danger', 10000);
         });
     }
     changeDetails (data) {
@@ -120,20 +121,21 @@ export class AuthService {
                 this._statusService.displayStatus('Checkout complete', 'success');
                 this.routeReload();
         }, (err) => {
-            this._statusService.displayStatus('Error checking out the book', 'danger');
+            this._statusService.displayStatus('The book may already be checked out under same email!', 'danger', 10000);
         });
     }
     removeIssues(isbn) {
         this.http.post<any>(this.path + '/removeIssue', isbn).subscribe(res => {
-                this._statusService.displayStatus('Successfully returned the book', 'success');
-                this.routeReload();
+            this._statusService.displayStatus('Successfully returned the book', 'success');
+            window.location.reload();
+            // this.routeReload();
         } , (err) => {
             this._statusService.displayStatus('Error. Something went wrong.', 'danger');
         });
     }
 
     routeReload() {
-        this.themeService.saveTheme();
+        console.log(this.router.url);
         this.router.navigated = false;
         this.router.navigate([this.router.url]);
     }

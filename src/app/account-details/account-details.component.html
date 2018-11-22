@@ -5,7 +5,7 @@
     <mat-card>
         <mat-card-content>
             Change only the values you want to update! <br>
-            <span style="color:red;"> Keep blank to keep values same. </span>
+            <!-- <span style="color:red;"> Keep blank to keep values same. </span> -->
         </mat-card-content>
     </mat-card>
     <mat-card >
@@ -25,7 +25,6 @@
                     <input #input [(ngModel)]="AccountDetails.password" name="password" matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" [formControl]="password">
                     <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                     <mat-hint align="end">Count: {{input.value?.length || 0}}</mat-hint>
-                    <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
                 </mat-form-field>
                 <br>
                 <button (click)="change_details()" style="margin-top:20px;" mat-raised-button color="primary">Update</button>

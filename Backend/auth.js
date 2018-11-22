@@ -59,6 +59,8 @@ router.post('/makeIssue', (req, res) => {
                 }
             }
             )
+        } else {
+            res.status(400).send({ message: "Error" })
         }
     })
 });
@@ -121,11 +123,19 @@ router.post('/changeUser', (req, res) => {
 router.post('/registerb', (req, res) => {
     var bookData = req.body
     var book = new Book(bookData)
-    book.save((err, newBook) => {
-        if (err)
-            res.status(500).send({ message: "Error" })
-        res.status(200).send({ message: 'Success' })
-    })
+    Book.findOne({ isbn: bookData.isbn }, function (err, fo) {
+        if (err) {}
+        if (!fo) {
+            book.save((err, newBook) => {
+                if (err)
+                    res.status(500).send({ message: "Error" })
+                res.status(200).send({ message: 'Success' })
+            })
+        } else {
+            res.status(400).send({ message: "Error" })
+        }
+    });
+    
 });
 
 router.post('/register', (req, res) => {
