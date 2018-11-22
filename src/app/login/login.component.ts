@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
   register_post() {
     if (this.email.status === 'VALID' && this.password.status === 'VALID') {
       this.authService.registerUser(this.RegisterData);
-      this.router.navigateByUrl(this.return);
     } else {
       this.statusService.displayStatus('There are errors in the register form', 'warning');
     }
@@ -71,7 +70,6 @@ export class LoginComponent implements OnInit {
   login_post() {
     if (this.email1.status === 'VALID' && this.password1.status === 'VALID') {
       this.authService.loginUser(this.loginData);
-      this.router.navigateByUrl(this.return);
     } else {
       this.statusService.displayStatus('There are errors in the Login form', 'warning');
     }

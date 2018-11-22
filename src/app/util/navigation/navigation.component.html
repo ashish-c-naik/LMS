@@ -81,7 +81,7 @@
     <a class="header_link" *ngIf="!authService.isAuthenticated&&navigationService.showRegister" [routerLink]="['/login']">
       Register
     </a>
-    <mat-slide-toggle matTooltip="Change theme" style="font-size: 0.7em;margin-left:15px;" [checked] = 'themeService.switch' [(ngModel)]='themeService.switch'></mat-slide-toggle>    
+    <mat-slide-toggle matTooltip="Change theme" style="font-size: 0.7em;margin-left:15px;" [(ngModel)]='themeService.switch'></mat-slide-toggle>    
   </mat-toolbar>
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav mode="over" fixedTopGap="62" fixedInViewport="true" 

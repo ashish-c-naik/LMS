@@ -144,16 +144,19 @@ router.post('/register', (req, res) => {
 router.post('/login', async (req, res) => {
     var loginData = req.body
     var user = await User.findOne({ email: loginData.email })
-    if (!user)
+    if (!user) {
         res.status(401).send({ message: "Email or Password invalid" })
-    bcrypt.compare(loginData.password, user.password, (error, isMatch) => {
-        if (!isMatch)
-            return res.status(401).send({ message: "Email or Password invalid" })
-        var payload = { sub: user._id }
-        var token = jwt.encode(payload, "123")
-        console.log(token)
-        res.status(200).send({ token })
-    })
+    }    
+    else {
+            bcrypt.compare(loginData.password, user.password, (error, isMatch) => {
+            if (!isMatch)
+                return res.status(401).send({ message: "Email or Password invalid" })
+            var payload = { sub: user._id }
+            var token = jwt.encode(payload, "123")
+            console.log(token)
+            res.status(200).send({ token })
+        })
+    }
 });
 
 var auth = {

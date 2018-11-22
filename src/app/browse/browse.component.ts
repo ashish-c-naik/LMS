@@ -31,7 +31,7 @@ export interface DialogUpdateDate {
 export class BrowseComponent implements OnInit {
   pagetitle = 'Mathematics';
   pageEvent: PageEvent;
-  checkout_email =  localStorage.getItem('email');
+  checkout_email = localStorage.getItem('email');
 
   title: string;
   author: string;
@@ -51,6 +51,10 @@ export class BrowseComponent implements OnInit {
     private navigationService: NavigationService,
     private statusService: StatusService
   ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
         this.router.navigated = false;
@@ -276,7 +280,7 @@ export class Dialog2Component {
         (click)="dialogRef2.close(data)" cdkFocusInitial>Ok</button>
       </div>
 </div>`,
-styles: [`
+  styles: [`
   mat-form-field {
     margin-top:15px;
   }
@@ -293,12 +297,12 @@ export class DialogUpdateComponent {
 
   getErrorMessageTitle() {
     return this.title.hasError('required') ? 'You must enter a value' :
-        '';
+      '';
   }
 
   getErrorMessageAuthor() {
     return this.author.hasError('required') ? 'You must enter a value' :
-        '';
+      '';
   }
 
   // getErrorMessageISBN() {
@@ -309,17 +313,17 @@ export class DialogUpdateComponent {
 
   getErrorMessageCategory() {
     return this.category.hasError('required') ? 'You must enter a value' :
-        '';
+      '';
   }
 
   getErrorMessageLocation() {
     return this.location.hasError('required') ? 'You must enter a value' :
-        '';
+      '';
   }
 
   getErrorMessageAvailability() {
     return this.availability.hasError('required') ? 'You must enter a value' :
-    this.title.hasError('pattern') ? 'Invalid entry' :
+      this.title.hasError('pattern') ? 'Invalid entry' :
         '';
   }
   constructor(

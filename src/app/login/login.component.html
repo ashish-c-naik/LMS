@@ -23,7 +23,7 @@
                             [formControl]="password1" required>
                         <mat-icon style="cursor: pointer;" matSuffix (click)="hidePasswordLogin = !hidePasswordLogin">{{hidePasswordLogin ? 'visibility_off' : 'visibility'}}</mat-icon>
                         <mat-hint align="end">Count: {{input1.value?.length || 0}}</mat-hint>
-                        <mat-error *ngIf="password1.invalid">{{getErrorMessagePassword1()}}</mat-error>
+                        <!-- <mat-error *ngIf="password1.invalid  && password.untouched">{{getErrorMessagePassword1()}}</mat-error> -->
                     </mat-form-field>
                     <br>
                     <button (click)="login_post()" style="margin-top: 20px;" mat-raised-button color="primary">Login</button>
@@ -54,9 +54,8 @@
                     <mat-form-field class="example-full-width" hintLabel="Minimum 6 characters long">
                         <input #input [(ngModel)]="RegisterData.password" name="password" matInput placeholder="Password" [type]="hidePasswordRegister ? 'password' : 'text'" [formControl]="password" required>
                         <mat-icon style="cursor: pointer;" matSuffix (click)="hidePasswordRegister = !hidePasswordRegister">{{hidePasswordRegister ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        <mat-hint align="end">Count: {{input.value?.length || 0}}</mat-hint>
-                        <!-- Must contain at least one number and one uppercase and lowercase letter -->
-                        <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+                        <mat-error *ngIf="password.invalid && password.untouched" >{{getErrorMessagePassword()}}</mat-error>
+                        <mat-hint align="end">Count: {{input.value?.length || 0}}</mat-hint>                        
                     </mat-form-field>
                     <br>
                     <button (click)="register_post()" style="margin-top: 20px;" mat-raised-button color="primary">Register</button>

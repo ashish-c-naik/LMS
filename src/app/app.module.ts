@@ -8,7 +8,8 @@ import { MatMenuModule, MatButtonModule,
   MatIconModule, MatToolbarModule, MatListModule,
   MatCheckboxModule, MatFormFieldModule, MatInputModule,
   MatCardModule, MatGridListModule, MatPaginatorModule, MatDialogModule,
-  MatTableModule, MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatTooltipModule} from '@angular/material';
+  MatTableModule, MatRadioModule, MatSelectModule, MatSliderModule,
+  MatSlideToggleModule, MatTooltipModule, MatProgressSpinnerModule} from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
 import { NavigationComponent } from './util/navigation/navigation.component';
@@ -78,7 +79,8 @@ import { ThemeService } from './theme.service';
     MatRadioModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
     DialogComponent,

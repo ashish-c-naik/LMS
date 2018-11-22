@@ -14,20 +14,24 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [AuthGuardLogin],
+    runGuardsAndResolvers: 'always',
   },
   {
     path: 'issue_history',
     component: IssueHistoryComponent,
+    runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
   },
   {
     path: 'account_details',
     component: AccountDetailsComponent,
+    runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
   },
   {
     path: 'register_book',
     component: RegisterBookComponent,
+    runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
   },
   {
