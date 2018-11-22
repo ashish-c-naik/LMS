@@ -1,6 +1,6 @@
 <div class="mat-drawer-container" style="position: fixed; height: 130px;">
   <div style=" height: 30px; text-align: center;padding: 5px; width: 100vw;z-index: 99; top: 80px; ">
-    <span style="font-size: 25px;">Issue History</span>
+    <span style="font-size: 25px;">Checkout history</span>
   </div>
   <div style=" position: fixed;z-index: 100;top:130px;width: 100vw;">
     <mat-form-field style="width: 50%;">
@@ -19,13 +19,13 @@
   </ng-container>
 
   <ng-container matColumnDef="email" *ngIf="_authService.Admin">
-    <th mat-header-cell *matHeaderCellDef> Email id </th>
+    <th mat-header-cell *matHeaderCellDef> Email Id </th>
     <td mat-cell *matCellDef="let element"> {{element.email}} </td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="isbn">
-    <th mat-header-cell *matHeaderCellDef> ISBN number </th>
+    <th mat-header-cell *matHeaderCellDef> Book Id </th>
     <td mat-cell *matCellDef="let element"> {{element.isbn}} </td>
   </ng-container>
 
@@ -41,12 +41,12 @@
   </ng-container>
 
   <ng-container matColumnDef="issue">
-    <th mat-header-cell *matHeaderCellDef> Issue </th>
+    <th mat-header-cell *matHeaderCellDef> Checkout date </th>
     <td mat-cell *matCellDef="let element"> {{element.issue | date}} </td>
   </ng-container>
 
   <ng-container matColumnDef="due">
-    <th mat-header-cell *matHeaderCellDef> Due </th>
+    <th mat-header-cell *matHeaderCellDef> Due date </th>
     <td mat-cell *matCellDef="let element"> {{element.due | date}} </td>
   </ng-container>
 
