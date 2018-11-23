@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from '../auth.service';
 import { BookService } from '../book.service';
@@ -19,7 +19,7 @@ export interface TableElement {
   fine: number;
 }
 export class ExampleHttpDao {
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   getIssues(param: string, isAdmin: boolean): Observable<any> {
     const href = environment.path;
@@ -45,11 +45,11 @@ export class ExampleHttpDao {
 export class IssueHistoryComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
+  firstRadio = true;
   index = 0;
   data: TableElement[] = [];
   count = 1;
-  displayedColumns: string[] = ['serial', 'isbn', 'title', 'author', 'issue', 'due', 'fine'];
+  displayedColumns: string[] = ['serial', 'isbn', 'title', 'author', 'issue', 'due', 'fine', 'return'];
   dataSource = null;
 
   applyFilter(filterValue: string) {
@@ -57,11 +57,11 @@ export class IssueHistoryComponent implements OnInit {
   }
   constructor(
     public dialog: MatDialog,
-    private _authService: AuthService,
-    private _bookService: BookService,
-    private http: HttpClient,
-    private navigationService: NavigationService,
-    private statusService: StatusService
+    public _authService: AuthService,
+    public _bookService: BookService,
+    public http: HttpClient,
+    public navigationService: NavigationService,
+    public statusService: StatusService
   ) {
   }
 
@@ -80,9 +80,14 @@ export class IssueHistoryComponent implements OnInit {
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
     if (this._authService.Admin) {
-      this.displayedColumns.push('email');
-      this.displayedColumns.push('return');
+      this.displayedColumns = ['serial', 'isbn', 'title', 'author', 'issue', 'due', 'fine', 'email', 'return'];
     }
+  }
+
+  applyfilter (event) {
+    this.applyFilter(event);
+    this.firstRadio = true;
+    console.log(this.firstRadio);
   }
  OnChanges () {
   new ExampleHttpDao(this.http).getIssues(localStorage.getItem('email'), localStorage.getItem('admin') === 'True').subscribe(res => {
@@ -107,10 +112,10 @@ export class IssueHistoryComponent implements OnInit {
     return diffDays;
   }
 
-  return(isbn: number) {
-    this._authService.removeIssues({isbn: isbn});
+  return(isbn: number, email: string) {
+    this._authService.removeIssues({isbn: isbn, email: email});
   }
-  openDialog(isbn): void {
+  openDialog(isbn, email): void {
     const dialogRef = this.dialog.open(Dialog1Component, {
       width: '250px',
       data: { }
@@ -119,7 +124,7 @@ export class IssueHistoryComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if (result) {
-        this.return (isbn);
+        this.return(isbn, email);
       } else {
         this.statusService.displayStatus('Cancelled the operation', 'info');
       }
@@ -142,7 +147,7 @@ export class IssueHistoryComponent implements OnInit {
 })
 export class Dialog1Component {
   constructor(
-    private _authService: AuthService,
+    public _authService: AuthService,
     public dialogRef: MatDialogRef<Dialog1Component>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 

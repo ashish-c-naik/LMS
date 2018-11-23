@@ -14,3 +14,6 @@ table {
     height: 300px;
     overflow: auto;
   }
+  .selected {
+    background: rgba(1, 1, 1, 0.3)
+  }

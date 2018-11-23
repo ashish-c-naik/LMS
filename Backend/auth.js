@@ -8,17 +8,23 @@ var router = express.Router()
 
 router.post('/removeIssue', (req, res) => {
     var data = req.body
-    Issue.findOneAndRemove({ isbn: data.isbn }, function (err) {
+    Issue.findOne({ isbn: data.isbn, returned: false, email:data.email }, function (err, obj) {
         if (err)
             res.status(500).send({ message: "Error" })
-        Book.findOne({ isbn: data.isbn }, function (err, obj) {
-            obj.availability = obj.availability + 1;
-            obj.save(function (err, uo) {
-                if (err)
-                    res.status(500).send({ message: 'Error' });
-                res.status(200).send({ message: "Success" })
+        obj.returned = true
+        obj.save((err, o) => {
+            if (err)
+                res.status(500).send({ message: "Error" })
+            Book.findOne({ isbn: data.isbn }, function (err, obj) {
+                obj.availability = obj.availability + 1;
+                obj.save(function (err, uo) {
+                    if (err)
+                        res.status(500).send({ message: 'Error' });
+                    res.status(200).send({ message: "Success" })
+                })
             })
-        })
+        }) 
+        
     }
     )
 });
@@ -26,7 +32,7 @@ router.post('/removeIssue', (req, res) => {
 router.post('/makeIssue', (req, res) => {
     var data = req.body
     var book;
-    Issue.findOne({ email: data.email, isbn: data.isbn }, function (err, obj) {
+    Issue.findOne({ email: data.email, isbn: data.isbn, returned: false }, function (err, obj) {
         if (err) {}
         if (!obj) {
             Book.findOne({ isbn: data.isbn }, function (err, obj) {
@@ -49,7 +55,8 @@ router.post('/makeIssue', (req, res) => {
                         author: obj.author,
                         title: obj.title,
                         issue: today,
-                        due: due
+                        due: due,
+                        returned: false
                     });
                     issue.save((err, obj) => {
                         if (err)
@@ -98,7 +105,7 @@ router.post('/removeBook', (req, res) => {
 
 router.post('/changeUser', (req, res) => {
     var data = req.body
-    User.findOne({ email: data.previous }, function (err, fo) {
+    User.findOne({ email: data.email }, function (err, fo) {
         if (err)
             res.status(500).send({ message: 'Error' });
         else {

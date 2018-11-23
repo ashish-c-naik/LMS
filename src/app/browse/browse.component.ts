@@ -15,12 +15,7 @@ export interface DialogData {
 }
 
 export interface DialogUpdateDate {
-  BookTitle: string;
-  Author: string;
-  BookId: string;
-  Category: CategoryEnum;
-  Location: string;
-  Availability: number;
+  data;
 }
 
 @Component({
@@ -33,23 +28,17 @@ export class BrowseComponent implements OnInit {
   pageEvent: PageEvent;
   checkout_email = localStorage.getItem('email');
 
-  title: string;
-  author: string;
-  id: number;
-  category: string;
-  location: string;
-  availability: number;
 
   constructor(
     public dialog: MatDialog,
     public dialog1: MatDialog,
     public dialog2: MatDialog,
-    private _authService: AuthService,
-    private route: ActivatedRoute,
-    private _bookService: BookService,
-    private router: Router,
-    private navigationService: NavigationService,
-    private statusService: StatusService
+    public _authService: AuthService,
+    public route: ActivatedRoute,
+    public _bookService: BookService,
+    public router: Router,
+    public navigationService: NavigationService,
+    public statusService: StatusService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -183,7 +172,7 @@ export class DialogComponent {
         '';
   }
   constructor(
-    private _authService: AuthService,
+    public _authService: AuthService,
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
@@ -209,7 +198,7 @@ export class DialogComponent {
 })
 export class Dialog2Component {
   constructor(
-    private _authService: AuthService,
+    public _authService: AuthService,
     public dialogRef1: MatDialogRef<Dialog2Component>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
@@ -326,7 +315,7 @@ export class DialogUpdateComponent {
         '';
   }
   constructor(
-    private _authService: AuthService,
+    public _authService: AuthService,
     public dialogRef2: MatDialogRef<DialogUpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogUpdateDate) {
 

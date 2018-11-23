@@ -47,11 +47,11 @@ export class LoginComponent implements OnInit {
       this.password1.hasError('minLength') ? 'Minimum length of password must be 6' :
         '';
   }
-  constructor(private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private navigationService: NavigationService,
-    private statusService: StatusService
+  constructor(public authService: AuthService,
+    public router: Router,
+    public route: ActivatedRoute,
+    public navigationService: NavigationService,
+    public statusService: StatusService
   ) {
   }
 

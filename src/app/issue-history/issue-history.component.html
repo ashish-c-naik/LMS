@@ -3,9 +3,14 @@
     <span style="font-size: 25px;">Checkout history</span>
   </div>
   <div style=" position: fixed;z-index: 100;top:130px;width: 100vw;padding: 10px;">
-    <mat-form-field style="width: 50%;">
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter the results">
+    <mat-form-field style="width: 25%;">
+      <input matInput (keyup)="applyfilter($event.target.value)" placeholder="Filter the results">
     </mat-form-field>
+    <mat-radio-group style="width: 25%;">
+        <mat-radio-button [checked] = "firstRadio" style="margin-left:5px;" value="" (change)="applyFilter($event.value)">All</mat-radio-button>
+        <mat-radio-button style="margin-left:5px;" value="true" (change)="applyFilter($event.value)">Returned</mat-radio-button>
+        <mat-radio-button style="margin-left:5px;" value="false" (change)="applyFilter($event.value)">Pending</mat-radio-button>
+      </mat-radio-group>
     <mat-paginator style="float:right; background: none; width: 50%;" (page)="onPaginateChange($event)" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
 </div>
@@ -15,51 +20,53 @@
   <!-- Position Column -->
   <ng-container matColumnDef="serial">
     <th mat-header-cell *matHeaderCellDef> Sr. No. </th>
-    <td mat-cell *matCellDef="let element; let i = index"> {{i+1+index}} </td>
+    <td mat-cell [ngClass]="{'selected': element.returned}" *matCellDef="let element; let i = index"> {{i+1+index}} </td>
   </ng-container>
 
   <ng-container matColumnDef="email" *ngIf="_authService.Admin">
     <th mat-header-cell *matHeaderCellDef> Email Id </th>
-    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    <td mat-cell [ngClass]="{'selected': element.returned}" *matCellDef="let element"> {{element.email}} </td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="isbn">
     <th mat-header-cell *matHeaderCellDef> Book Id </th>
-    <td mat-cell *matCellDef="let element"> {{element.isbn}} </td>
+    <td mat-cell [ngClass]="{'selected': element.returned}" *matCellDef="let element"> {{element.isbn}} </td>
   </ng-container>
 
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef> Book title </th>
-    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    <td mat-cell [ngClass]="{'selected': element.returned}" *matCellDef="let element"> {{element.title}} </td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="author">
     <th mat-header-cell *matHeaderCellDef> Author </th>
-    <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+    <td mat-cell [ngClass]="{'selected': element.returned}" *matCellDef="let element"> {{element.author}} </td>
   </ng-container>
 
   <ng-container matColumnDef="issue">
     <th mat-header-cell *matHeaderCellDef> Checkout date </th>
-    <td mat-cell *matCellDef="let element"> {{element.issue | date}} </td>
+    <td mat-cell [ngClass]="{'selected': element.returned}" *matCellDef="let element"> {{element.issue | date}} </td>
   </ng-container>
 
   <ng-container matColumnDef="due">
     <th mat-header-cell *matHeaderCellDef> Due date </th>
-    <td mat-cell *matCellDef="let element"> {{element.due | date}} </td>
+    <td mat-cell [ngClass]="{'selected': element.returned}" *matCellDef="let element"> {{element.due | date}} </td>
   </ng-container>
 
 
   <ng-container matColumnDef="fine">
     <th mat-header-cell *matHeaderCellDef> Fine ($) </th>
-    <td mat-cell *matCellDef="let element"> {{ getFine(element.due)| currency}} </td>
+    <td mat-cell [ngClass]="{'selected': element.returned}" *matCellDef="let element"> {{ getFine(element.due)| currency}} </td>
   </ng-container>
 
-  <ng-container *ngIf="_authService.Admin" matColumnDef="return">
+  <ng-container matColumnDef="return">
     <th mat-header-cell *matHeaderCellDef> Return </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-stroked-button color="warn" (click)="openDialog(element.isbn)">Return</button>
+    <td mat-cell [ngClass]="{'selected': element.returned}" *matCellDef="let element">
+      <button mat-stroked-button color="warn" (click)="openDialog(element.isbn, element.email)" *ngIf="!element.returned&&_authService.Admin">Return</button>
+      <span style="color:grey;"  *ngIf="element.returned">Returned</span>
+      <span *ngIf="!element.returned&&!_authService.Admin">Pending</span>      
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

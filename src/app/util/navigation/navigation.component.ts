@@ -17,15 +17,15 @@ export class NavigationComponent implements OnInit {
   show = false;
   islogged = this.authService.isAuthenticated;
   opened: boolean;
-  private media: string;
+  public media: string;
   switch = false;
   @ViewChild('snav') sideNav: MatSidenav;
   constructor(
-    private _media$: ObservableMedia,
-    private authService: AuthService,
-    private router: Router,
-    private navigationService: NavigationService,
-    private themeService: ThemeService
+    public _media$: ObservableMedia,
+    public authService: AuthService,
+    public router: Router,
+    public navigationService: NavigationService,
+    public themeService: ThemeService
   ) { }
 
   ngOnInit() {

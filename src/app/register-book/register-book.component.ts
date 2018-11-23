@@ -62,11 +62,11 @@ export class RegisterBookComponent implements OnInit {
         '';
   }
   constructor(
-    private _authService: AuthService,
-    private _router: Router,
-    private _bookService: BookService,
-    private navigationService: NavigationService,
-    private _statusService: StatusService
+    public _authService: AuthService,
+    public _router: Router,
+    public _bookService: BookService,
+    public navigationService: NavigationService,
+    public _statusService: StatusService
   ) { }
 
   ngOnInit() {

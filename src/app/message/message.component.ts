@@ -13,7 +13,7 @@ import { SnackbarComponent } from './message-snackbar.component';
 
 export class MessageComponent implements OnInit, OnDestroy {
   subscription: Subscription;
-  constructor(public snackBar: MatSnackBar, private _statusService: StatusService) {
+  constructor(public snackBar: MatSnackBar, public _statusService: StatusService) {
     this.subscription = _statusService.statusStream$.subscribe(
       statuskm => {
         this.snackBar.openFromComponent(SnackbarComponent, {

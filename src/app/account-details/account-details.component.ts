@@ -12,10 +12,8 @@ import { FormControl, Validators } from '@angular/forms';
 export class AccountDetailsComponent implements OnInit {
   hidePassword = true;
   AccountDetails = {
-    previous: '',
-    email: '',
-    password: '',
-    confirm_password: ''
+    email: localStorage.getItem('email'),
+    password: ''
   };
   email = new FormControl('', [Validators.email]);
   password = new FormControl('', [Validators.minLength(6)]);
@@ -29,10 +27,10 @@ export class AccountDetailsComponent implements OnInit {
             '';
   }
   constructor(
-    private _authService: AuthService,
-    private _statusService: StatusService,
-    private navigationService: NavigationService,
-    private statusService: StatusService
+    public _authService: AuthService,
+    public _statusService: StatusService,
+    public navigationService: NavigationService,
+    public statusService: StatusService
   ) { }
 
   ngOnInit() {
@@ -43,17 +41,6 @@ export class AccountDetailsComponent implements OnInit {
 
   change_details() {
     if (this.email.status === 'VALID' && this.password.status === 'VALID') {
-      if (this.AccountDetails.email === null || this.AccountDetails.password === null) {
-        this._statusService.displayStatus('Fill atleast one detail', 'warn');
-        return;
-      } else if (this.AccountDetails.email === '') {
-        this.AccountDetails.email = localStorage.getItem('email');
-      } else if ( this.AccountDetails.password === '') {
-        this.AccountDetails.password = localStorage.getItem('password');
-      }
-      this.AccountDetails.previous = localStorage.getItem('email');
-      localStorage.setItem('email1', this.AccountDetails.email);
-      localStorage.setItem('password1', this.AccountDetails.password);
       this._authService.changeDetails(this.AccountDetails);
     } else {
       this.statusService.displayStatus('There are errors in the register form', 'warning');

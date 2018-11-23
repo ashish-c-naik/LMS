@@ -5,6 +5,7 @@ var issueSchema = new mongoose.Schema({
     author: String,
     title: String,
     issue: Date,
-    due: Date
+    due: Date,
+    returned: Boolean
 })
 module.exports = mongoose.model('Issue', issueSchema)

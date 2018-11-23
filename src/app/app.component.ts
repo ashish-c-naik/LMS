@@ -10,7 +10,7 @@ import { ThemeService } from './theme.service';
 export class AppComponent {
   title = 'KASND';
   constructor (
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {
   }
 
