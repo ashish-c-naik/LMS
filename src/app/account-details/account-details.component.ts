@@ -40,7 +40,7 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   change_details() {
-    if (this.email.status === 'VALID' && this.password.status === 'VALID') {
+    if (this.email.status === 'VALID' && this.password.status === 'VALID' && this.AccountDetails.password !== '') {
       this._authService.changeDetails(this.AccountDetails);
     } else {
       this.statusService.displayStatus('There are errors in the register form', 'warning');
