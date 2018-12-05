@@ -151,13 +151,10 @@ export class BrowseComponent implements OnInit {
   <div >
     <h1 mat-dialog-title>Checkout</h1>
       <div mat-dialog-content *ngIf="_authService.isAuthenticated">
-        <p>You are checking out using</p>
-        <mat-form-field>
-          <input matInput [(ngModel)]="data.email" disabled>
-        </mat-form-field>
+        <p>Are you sure?</p>
       </div>
       <div mat-dialog-content *ngIf="!_authService.isAuthenticated">
-        <p>Enter your email id to checkout:</p>
+        <p>Enter your email id and confirm checkout:</p>
         <mat-form-field>
           <input matInput [(ngModel)]="data.email" [formControl]="email" required>
           <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
@@ -165,8 +162,10 @@ export class BrowseComponent implements OnInit {
       </div>
       <div mat-dialog-actions>
         <button mat-button (click)="dialogRef.close(false)">Cancel</button>
-        <button mat-button [disabled]="email.status !== 'VALID' && !_authService.isAuthenticated"
-        (click)="dialogRef.close(data.email)" cdkFocusInitial>Ok</button>
+        <button *ngIf="_authService.isAuthenticated" mat-button [disabled]="email.status !== 'VALID' && !_authService.isAuthenticated"
+        (click)="dialogRef.close(data.email)" cdkFocusInitial>Yes</button>
+        <button *ngIf="!_authService.isAuthenticated" mat-button [disabled]="email.status !== 'VALID' && !_authService.isAuthenticated"
+        (click)="dialogRef.close(data.email)" cdkFocusInitial>Checkout</button>
       </div>
 </div>`,
 })

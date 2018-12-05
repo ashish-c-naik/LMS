@@ -57,6 +57,8 @@ export class AuthService {
     loginUser(loginData) {
         if (loginData.email === 'ashish@gmail.com') {
             localStorage.setItem(this.ADMIN_KEY, 'True');
+        } else {
+            localStorage.setItem(this.ADMIN_KEY, 'False');
         }
         this.http.post<any>(this.path + '/login', loginData).subscribe(res => {
             console.log(res);

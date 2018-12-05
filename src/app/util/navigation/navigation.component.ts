@@ -40,4 +40,7 @@ export class NavigationComponent implements OnInit {
       this.sideNav.close();
     } else { this.showTitle = true; }
   }
+  change () {
+    this.themeService.changeTheme();
+  }
 }
