@@ -16,14 +16,15 @@ export class AccountDetailsComponent implements OnInit {
     password: ''
   };
   email = new FormControl('', [Validators.email]);
-  password = new FormControl('', [Validators.minLength(6)]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
   getErrorMessageEmail() {
     return this.email.hasError('email') ? 'Not a valid email' :
             '';
   }
   getErrorMessagePassword() {
-    return this.password.hasError('minLength') ? 'Minimum length of password must be 6' :
+    return this.password.hasError('required') ? 'You must enter a value' :
+    this.password.hasError('minLength') ? 'Minimum length of password must be 6' :
             '';
   }
   constructor(
@@ -40,7 +41,7 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   change_details() {
-    if (this.email.status === 'VALID' && this.password.status === 'VALID' && this.AccountDetails.password !== '') {
+    if (this.email.status === 'VALID' && this.password.status === 'VALID') {
       this._authService.changeDetails(this.AccountDetails);
     } else {
       this.statusService.displayStatus('There are errors in the register form', 'warning');
