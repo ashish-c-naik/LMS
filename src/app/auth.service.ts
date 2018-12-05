@@ -51,7 +51,7 @@ export class AuthService {
             this._statusService.displayStatus('Registered!', 'success');
             this.routeReload();
         }, (err) => {
-            this._statusService.displayStatus('There was a problem in registration. Please try again!', 'danger');
+            this._statusService.displayStatus('Problem with the registration. Email ID may already be in use. Please try again!', 'danger');
         });
     }
     loginUser(loginData) {
@@ -71,10 +71,9 @@ export class AuthService {
     registerBook(registerData) {
 
         this.http.post<any>(this.path + '/registerb', registerData).subscribe(res => {
-                localStorage.setItem(this.EMAIL_KEY, registerData.email);
                 this._statusService.displayStatus('Success registering a book', 'success');
-                this.routeReload();
-                window.location.reload();
+                // this.routeReload();
+                // window.location.reload();
         }, (err) => {
             this._statusService.displayStatus('Error! Already have a book with same Book id', 'danger', 10000);
         });
@@ -118,7 +117,7 @@ export class AuthService {
     removeIssues(data) {
         this.http.post<any>(this.path + '/removeIssue', data).subscribe(res => {
             this._statusService.displayStatus('Successfully returned the book', 'success');
-            window.location.reload();
+            // window.location.reload();
             // this.routeReload();
         } , (err) => {
             this._statusService.displayStatus('Error. Something went wrong.', 'danger');

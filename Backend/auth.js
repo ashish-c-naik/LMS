@@ -15,9 +15,9 @@ router.post('/removeIssue', (req, res) => {
         obj.save((err, o) => {
             if (err)
                 res.status(500).send({ message: "Error" })
-            Book.findOne({ isbn: data.isbn }, function (err, obj) {
-                obj.availability = obj.availability + 1;
-                obj.save(function (err, uo) {
+            Book.findOne({ isbn: data.isbn }, function (err, oj) {
+                oj.availability = oj.availability + 1;
+                oj.save(function (err, uo) {
                     if (err)
                         res.status(500).send({ message: 'Error' });
                     res.status(200).send({ message: "Success" })
@@ -29,47 +29,44 @@ router.post('/removeIssue', (req, res) => {
     )
 });
 
-router.post('/makeIssue', (req, res) => {
+router.post('/makeIssue', async (req, res) => {
     var data = req.body
     var book;
-    Issue.findOne({ email: data.email, isbn: data.isbn, returned: false }, function (err, obj) {
-        if (err) {}
-        if (!obj) {
-            Book.findOne({ isbn: data.isbn }, function (err, obj) {
-                if (err)
-                    res.status(500).send({ message: "Error" })
-                if (obj == null) {
-                    res.status(500).send({ message: "Error" })
-                } else {
-                    obj.availability = obj.availability - 1;
-                    obj.save(function (err, uo) {
-                        if (err)
-                            res.status(500).send({ message: 'Error' });
-                    })
-                    today = new Date();
-                    due = new Date();
-                    due.setDate(due.getDate() + 7)
-                    var issue = new Issue({
-                        email: data.email,
-                        isbn: data.isbn,
-                        author: obj.author,
-                        title: obj.title,
-                        issue: today,
-                        due: due,
-                        returned: false
-                    });
-                    issue.save((err, obj) => {
-                        if (err)
-                            res.status(500).send({ message: "Error" })
-                        res.status(200).send({ message: "Success" })
-                    })
-                }
+    var IssuePresent = await Issue.findOne({ email: data.email, isbn: data.isbn, returned: false })
+    if (IssuePresent) {
+        res.status(500).send({ message: "Error" })        
+    } else {
+        Book.findOne({ isbn: data.isbn }, function (err, obj) {
+            if (err)
+                res.status(500).send({ message: "Error" })
+            if (obj == null) {
+                res.status(500).send({ message: "Error" })
+            } else {
+                obj.availability = obj.availability - 1;
+                obj.save(function (err, uo) {
+                    if (err)
+                        res.status(500).send({ message: 'Error' });
+                })
+                today = new Date();
+                due = new Date();
+                due.setDate(due.getDate() + 7)
+                var issue = new Issue({
+                    email: data.email,
+                    isbn: data.isbn,
+                    author: obj.author,
+                    title: obj.title,
+                    issue: today,
+                    due: due,
+                    returned: false
+                });
+                issue.save((err, obj) => {
+                    if (err)
+                        res.status(500).send({ message: "Error" })
+                    res.status(200).send({ message: "Success" })
+                })
             }
-            )
-        } else {
-            res.status(400).send({ message: "Error" })
-        }
-    })
+        })
+    }
 });
 
 router.post('/updateBook', (req, res) => {
@@ -127,35 +124,37 @@ router.post('/changeUser', (req, res) => {
     })
 });
 
-router.post('/registerb', (req, res) => {
+router.post('/registerb', async (req, res) => {
     var bookData = req.body
     var book = new Book(bookData)
-    Book.findOne({ isbn: bookData.isbn }, function (err, fo) {
-        if (err) {}
-        if (!fo) {
-            book.save((err, newBook) => {
-                if (err)
-                    res.status(500).send({ message: "Error" })
-                res.status(200).send({ message: 'Success' })
-            })
-        } else {
-            res.status(400).send({ message: "Error" })
-        }
-    });
-    
+    var bookPresent = await Book.findOne({ isbn: bookData.isbn })
+    if (bookPresent) {
+        res.status(401).send({ message: "Already present" })        
+    } else {
+        book.save((err, newBook) => {
+            if (err)
+                res.status(500).send({ message: "Error" })
+            res.status(200).send({ message: 'Success' })
+        })
+    }
 });
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
     var userData = req.body
     var user = new User(userData)
-    user.save((err, newUser) => {
-        if (err)
-            res.status(500).send({ message: "Error" })
-        var payload = { sub: newUser._id }
-        var token = jwt.encode(payload, "123")
-        console.log(token)
-        res.status(200).send({ token })
-    })
+    var userPresent = await User.findOne({ email: userData.email })
+    if (userPresent) {
+        res.status(401).send({ message: "Email or Password invalid" })
+    } else {
+        user.save((err, newUser) => {
+            if (err)
+                res.status(500).send({ message: "Error" })
+            var payload = { sub: newUser._id }
+            var token = jwt.encode(payload, "123")
+            console.log(token)
+            res.status(200).send({ token })
+        })
+    }
 });
 
 router.post('/login', async (req, res) => {

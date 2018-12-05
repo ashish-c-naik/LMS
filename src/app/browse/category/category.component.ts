@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationService } from '../../util/navigation/navigation.service';
 
 @Component({
   selector: 'app-category',
@@ -43,9 +44,14 @@ export class CategoryComponent implements OnInit {
     name: 'Miscellaneous',
     link: '/browse/mis'
   }];
-  constructor() { }
+  constructor(
+    public navigationService: NavigationService
+  ) { }
 
   ngOnInit() {
+    this.navigationService.showLogin = true;
+    this.navigationService.showRegister = true;
+    this.navigationService.showSearch = true;
   }
 
 }

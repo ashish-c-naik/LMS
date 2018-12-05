@@ -36,7 +36,7 @@
   <mat-paginator style="border:none;  background: none;" [length]="5" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 </div>
-<mat-grid-list cols="5" rowHeight="490px" style="margin-top:20px;">
+<mat-grid-list *ngIf="_bookService.books" cols="5" rowHeight="490px" style="margin-top:20px;">
   <mat-grid-tile *ngFor='let book of _bookService.books' [colspan]="1" [rowspan]="1">
     <mat-card class="example-card">
       <div style="width: 100%; text-align: center;">
@@ -58,3 +58,12 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
+
+<div style="position: fixed; top: 50vh; left: 40vw;" *ngIf="_bookService.books.length === 0">
+  <mat-card>
+    <mat-card-content>
+      There are no items to display. <br>
+      Please choose a different category for now.
+    </mat-card-content>
+  </mat-card>
+</div>

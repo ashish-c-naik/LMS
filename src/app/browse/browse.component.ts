@@ -150,16 +150,23 @@ export class BrowseComponent implements OnInit {
   template: `
   <div >
     <h1 mat-dialog-title>Checkout</h1>
-      <div mat-dialog-content>
-        <p>Enter your email id to checkout!</p>
+      <div mat-dialog-content *ngIf="_authService.isAuthenticated">
+        <p>You are checking out using</p>
         <mat-form-field>
-          <input matInput [(ngModel)]="data.email" [disabled]="!_authService.isAuthenticated" [formControl]="email" required>
+          <input matInput [(ngModel)]="data.email" disabled>
+        </mat-form-field>
+      </div>
+      <div mat-dialog-content *ngIf="!_authService.isAuthenticated">
+        <p>Enter your email id to checkout:</p>
+        <mat-form-field>
+          <input matInput [(ngModel)]="data.email" [formControl]="email" required>
           <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
         </mat-form-field>
       </div>
       <div mat-dialog-actions>
         <button mat-button (click)="dialogRef.close(false)">Cancel</button>
-        <button mat-button [disabled]="email.status !== 'VALID'" (click)="dialogRef.close(data.email)" cdkFocusInitial>Ok</button>
+        <button mat-button [disabled]="email.status !== 'VALID' && !_authService.isAuthenticated"
+        (click)="dialogRef.close(data.email)" cdkFocusInitial>Ok</button>
       </div>
 </div>`,
 })
