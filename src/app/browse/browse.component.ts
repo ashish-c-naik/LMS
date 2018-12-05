@@ -198,7 +198,7 @@ export class DialogComponent {
       </div>
       <div mat-dialog-actions>
         <button mat-button (click)="dialogRef1.close(false)">Cancel</button>
-        <button mat-button (click)="dialogRef1.close(true)" cdkFocusInitial>Ok</button>
+        <button mat-button (click)="dialogRef1.close(true)" cdkFocusInitial>Yes</button>
       </div>
 </div>`,
 })

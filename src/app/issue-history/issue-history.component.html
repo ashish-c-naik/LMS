@@ -15,7 +15,7 @@
   </div>
 </div>
 <div class="example-container mat-elevation-z8" style="margin-top: 150px; margin-right:10px; margin-left:10px;">
-<table mat-table [dataSource]="dataSource">
+<table mat-table [dataSource]="dataSource" >
 
   <!-- Position Column -->
   <ng-container matColumnDef="serial">
@@ -72,4 +72,10 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<mat-card *ngIf="dataSource.data.length === 0" style="align-content: center; width: 25vw;position: fixed; top: 50vh; left:37vw;">
+  <mat-card-content>
+    There are no items to display. <br>
+    Please choose a different category for now.
+  </mat-card-content>
+</mat-card>
 </div>

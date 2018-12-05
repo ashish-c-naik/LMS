@@ -135,13 +135,13 @@ export class IssueHistoryComponent implements OnInit {
   selector: 'app-dialog',
   template: `
   <div>
-    <h1 mat-dialog-title>Checkout</h1>
+    <h1 mat-dialog-title>Return</h1>
       <mat-dialog-content>
         <p>Are you sure?</p>
       </mat-dialog-content>
       <div mat-dialog-actions>
         <button mat-button (click)="dialogRef.close(false)">Cancel</button>
-        <button mat-button (click)="dialogRef.close(true)" cdkFocusInitial>Ok</button>
+        <button mat-button (click)="dialogRef.close(true)" cdkFocusInitial>Yes</button>
       </div>
 </div>`,
 })
