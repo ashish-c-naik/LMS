@@ -55,7 +55,7 @@ export class AuthService {
         });
     }
     loginUser(loginData) {
-        if (loginData.email === 'admin@gmail.com') {
+        if (loginData.email === 'admin@lms.com') {
             localStorage.setItem(this.ADMIN_KEY, 'True');
         } else {
             localStorage.setItem(this.ADMIN_KEY, 'False');

@@ -232,14 +232,14 @@ export class Dialog2Component {
         </mat-form-field> -->
         <mat-form-field>
           <mat-select placeholder="Select a category" name="category" [(ngModel)]="data.data.category" [formControl]="category" required>
+            <mat-option value="art">Art</mat-option>
+            <mat-option value="ent">Entertainment</mat-option>
+            <mat-option value="fic">Fiction</mat-option>
+            <mat-option value="hea">Health</mat-option>
+            <mat-option value="his">History</mat-option>
             <mat-option value="mat">Mathematics</mat-option>
             <mat-option value="sci">Science</mat-option>
             <mat-option value="tec">Technology</mat-option>
-            <mat-option value="art">Art</mat-option>
-            <mat-option value="his">History</mat-option>
-            <mat-option value="hea">Health</mat-option>
-            <mat-option value="ent">Entertainment</mat-option>
-            <mat-option value="fic">Fiction</mat-option>
             <mat-option value="mis">Miscellaneous</mat-option>
           </mat-select>
           <mat-error *ngIf="category.invalid">{{getErrorMessageCategory()}}</mat-error>

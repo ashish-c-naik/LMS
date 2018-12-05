@@ -107,24 +107,24 @@
           </mat-icon>
         </div>
         <div *ngIf="show" class="" style="cursor: pointer;">
-          <a class="content" [routerLink]="['/browse', 'mat']">Mathematics</a>
-          <br>
-          <a class="content" [routerLink]="['/browse', 'sci']">Science</a>
-          <br>
-          <a class="content" [routerLink]="['/browse', 'tec']">Technology</a>
-          <br>
-          <a class="content" [routerLink]="['/browse', 'art']">Art</a>
-          <br>
-          <a class="content" [routerLink]="['/browse', 'his']">History</a>
-          <br>
-          <a class="content" [routerLink]="['/browse', 'hea']">Health</a>
-          <br>
-          <a class="content" [routerLink]="['/browse', 'ent']">Entertainment</a>
-          <br>
-          <a class="content" [routerLink]="['/browse',   'fic']">Fiction</a>
-          <br>
-          <a class="content" [routerLink]="['/browse', 'mis']">Miscellaneous</a>
-          <br>
+            <a class="content" [routerLink]="['/browse', 'art']">Art</a>
+            <br>
+            <a class="content" [routerLink]="['/browse', 'ent']">Entertainment</a>
+            <br>
+            <a class="content" [routerLink]="['/browse',   'fic']">Fiction</a>
+            <br>
+            <a class="content" [routerLink]="['/browse', 'hea']">Health</a>
+            <br>
+            <a class="content" [routerLink]="['/browse', 'his']">History</a>
+            <br>
+            <a class="content" [routerLink]="['/browse', 'mat']">Mathematics</a>
+            <br>
+            <a class="content" [routerLink]="['/browse', 'sci']">Science</a>
+            <br>
+            <a class="content" [routerLink]="['/browse', 'tec']">Technology</a>
+            <br>
+            <a class="content" [routerLink]="['/browse', 'mis']">Miscellaneous</a>
+            <br>
         </div>
         <br>
         <div class="content" *ngIf="authService.isAuthenticated" [routerLink]="['/account_details']" style="cursor: pointer;">

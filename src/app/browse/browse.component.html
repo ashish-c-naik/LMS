@@ -2,6 +2,21 @@
   <div style="height:30px;padding: 5px; text-align: center;">
     <mat-form-field style="font-size: 20px; margin-top:-30px;">
       <mat-select style="font-size: 15px;" placeholder="{{pagetitle}}">
+        <mat-option [routerLink]="['/browse', 'art']">
+          Art
+        </mat-option>
+        <mat-option [routerLink]="['/browse', 'ent']">
+          Entertainment
+        </mat-option>
+        <mat-option [routerLink]="['/browse', 'fic']">
+          Fiction
+        </mat-option>
+        <mat-option [routerLink]="['/browse', 'hea']">
+          Health
+        </mat-option>
+        <mat-option [routerLink]="['/browse', 'his']">
+          History
+        </mat-option>
         <mat-option  [routerLink]="['/browse', 'mat']">
           Mathematics
         </mat-option>
@@ -10,21 +25,6 @@
         </mat-option>
         <mat-option [routerLink]="['/browse', 'tec']">
           Technology
-        </mat-option>
-        <mat-option [routerLink]="['/browse', 'art']">
-          Art
-        </mat-option>
-        <mat-option [routerLink]="['/browse', 'his']">
-          History
-        </mat-option>
-        <mat-option [routerLink]="['/browse', 'hea']">
-          Health
-        </mat-option>
-        <mat-option [routerLink]="['/browse', 'ent']">
-          Entertainment
-        </mat-option>
-        <mat-option [routerLink]="['/browse', 'fic']">
-          Fiction
         </mat-option>
         <mat-option [routerLink]="['/browse', 'mis']">
           Miscellaneous

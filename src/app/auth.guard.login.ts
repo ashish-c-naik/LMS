@@ -19,7 +19,7 @@ export class AuthGuardLogin implements CanActivate {
       if (!this.authService.isAuthenticated) {
         return true;
       } else {
-        if (localStorage.getItem('admin')) {
+        if (this.authService.Admin) {
           this.router.navigate(['issue_history']);
         } else {
           this.router.navigate(['browse']);
