@@ -3,9 +3,14 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
 ## Screenshots:
-The proejct is hosted [here](http://lms-v1.s3-website.us-east-2.amazonaws.com/)
+The project is hosted [here](http://lms-v1.s3-website.us-east-2.amazonaws.com/)
 
-
+![ScreenShot](/lms_1.png)
+![ScreenShot](/lms_2.png)
+![ScreenShot](/lms_3.png)
+![ScreenShot](/lms_4.png)
+![ScreenShot](/lms_5.png)
+![ScreenShot](/lms_6.png)
 
 
 
