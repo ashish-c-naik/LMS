@@ -1,6 +1,6 @@
 # LMS
 
-This project was generated with
+This [project](http://lms-v1.s3-website.us-east-2.amazonaws.com/) was generated with
 * [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 * [MongoDB](https://www.mongodb.com/) mongoose version 5.3.13.
 * [ExpressJS](https://expressjs.com/) version 4.16.4.
