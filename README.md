@@ -5,12 +5,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Screenshots:
 The project is hosted [here](http://lms-v1.s3-website.us-east-2.amazonaws.com/)
 
-![ScreenShot](/lms_1.png)
-![ScreenShot](/lms_2.png)
-![ScreenShot](/lms_3.png)
-![ScreenShot](/lms_4.png)
-![ScreenShot](/lms_5.png)
-![ScreenShot](/lms_6.png)
+![ScreenShot](/screenshots/lms_1.png)
+![ScreenShot](/screenshots/lms_2.png)
+![ScreenShot](/screenshots/lms_3.png)
+![ScreenShot](/screenshots/lms_4.png)
+![ScreenShot](/screenshots/lms_5.png)
+![ScreenShot](/screenshots/lms_6.png)
 
 
 
