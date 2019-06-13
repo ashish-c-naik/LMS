@@ -16,7 +16,6 @@ The project is hosted [here](http://lms-v1.s3-website.us-east-2.amazonaws.com/)
 ![ScreenShot](/screenshots/lms_6.png)
 
 
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
